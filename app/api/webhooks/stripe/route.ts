@@ -5,7 +5,8 @@ import Stripe from 'stripe'
 
 export async function POST(request: NextRequest) {
   const body = await request.text()
-  const signature = headers().get('stripe-signature')
+  const headersList = await headers()
+  const signature = headersList.get('stripe-signature')
 
   if (!signature) {
     return NextResponse.json(
@@ -93,7 +94,6 @@ export async function POST(request: NextRequest) {
           invoiceId: invoice.id,
           customerId: invoice.customer,
           amount: invoice.amount_paid / 100,
-          subscriptionId: invoice.subscription,
         })
 
         // TODO: Send receipt email
@@ -108,7 +108,6 @@ export async function POST(request: NextRequest) {
         console.log('⚠️ Payment failed:', {
           invoiceId: invoice.id,
           customerId: invoice.customer,
-          subscriptionId: invoice.subscription,
         })
 
         // TODO: Send payment failed email

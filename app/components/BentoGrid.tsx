@@ -11,7 +11,7 @@ export default function BentoGrid() {
               <img src="/sign-nobrand-pressence.svg" alt="No Brand Presence" className={styles.roadSign} />
               <div className={styles.signShadow}></div>
             </div>
-            <p>Your Instagram isn't a website - and clients know it.</p>
+            <p>Your Instagram isn&apos;t a website - and clients know it.</p>
           </div>
           <div className={styles.problemCard}>
             <div className={styles.roadSignContainer}>
@@ -50,7 +50,7 @@ export default function BentoGrid() {
             </div>
             <div className={styles.solutionContent}>
               <h3>Website Design</h3>
-              <p>Unlimited pages. Mobile-optimized. Zero downtime hosting. 24/7 support. Stop losing clients to "I'll check your website."</p>
+              <p>Unlimited pages. Mobile-optimized. Zero downtime hosting. 24/7 support. Stop losing clients to &quot;I&apos;ll check your website.&quot;</p>
               <div className={styles.deliveryBadge}>Delivered in 7 days</div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function BentoGrid() {
             </div>
             <div className={styles.solutionContent}>
               <h3>Bitchin' Branding</h3>
-              <p>Professional logo. Brand colors. Social templates. 100 free business cards. Look like the premium option—because you are.</p>
+              <p>Professional logo. Brand colors. Social templates. 100 free business cards. Look like the premium option&mdash;because you are.</p>
               <div className={styles.deliveryBadge}>Delivered in 7 days</div>
             </div>
           </div>
