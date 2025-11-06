@@ -1,0 +1,449 @@
+/* Transformation Showcase Container */
+.transformationShowcase {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Badges */
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.badgeIcon {
+  font-size: 1.25rem;
+}
+
+/* Problem Statement */
+.problemStatement {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.problemCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.problemCard {
+  text-align: center;
+}
+
+.roadSignContainer {
+  position: relative;
+  margin-bottom: 3rem;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.roadSignContainer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 2px;
+  background: linear-gradient(to right, transparent 0%, rgba(80, 80, 80, 0.5) 20%, rgba(80, 80, 80, 0.8) 50%, rgba(80, 80, 80, 0.5) 80%, transparent 100%);
+  z-index: 10;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12);
+}
+
+.roadSign {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.signShadow {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%;
+  height: 12px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.08) 40%, transparent 70%);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.problemCard p {
+  font-size: 1.1rem;
+  color: #1f2937;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
+}
+
+/* Transform Arrow */
+.transformArrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.arrowLine {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-blue) 50%, transparent 100%);
+}
+
+.arrowIcon {
+  font-size: 2.5rem;
+  color: var(--accent-blue);
+  animation: bounce 2s ease-in-out infinite;
+  background: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+  border: 3px solid var(--accent-blue);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+/* Solution Section */
+.solutionSection {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.solutionSection .sectionBadge {
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+  color: #166534;
+}
+
+.solutionCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.solutionCard {
+  background: white;
+  border: 2px solid var(--accent-blue);
+  border-radius: 12px;
+  padding: 0;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.solutionCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
+  z-index: 1;
+}
+
+.solutionCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.25);
+  border-color: var(--primary-blue);
+}
+
+.solutionThumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.solutionThumbnail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.05), transparent 60%);
+}
+
+.solutionThumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+.solutionContent {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.solutionIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.solutionCard:nth-child(1) .solutionIcon {
+  animation-delay: 0s;
+}
+
+.solutionCard:nth-child(2) .solutionIcon {
+  animation-delay: 0.5s;
+}
+
+.solutionCard:nth-child(3) .solutionIcon {
+  animation-delay: 1s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.solutionContent h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-blue-dark);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+}
+
+.solutionContent p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  flex: 1;
+}
+
+.solutionCard h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-blue-dark);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+}
+
+.solutionCard p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.deliveryBadge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-orange) 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+/* Value Statement */
+.valueStatement {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: white;
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.valueStatement::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.valueContent {
+  position: relative;
+  z-index: 2;
+}
+
+.valueContent h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+}
+
+.valueContent p {
+  font-size: 1.125rem;
+  margin: 0 0 2rem 0;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.valuePrice {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.valuePriceAmount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--accent-yellow);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.valuePriceTag {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .problemStatement {
+    margin-bottom: 2rem;
+  }
+
+  .problemCards,
+  .solutionCards {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .problemCard,
+  .solutionCard {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .xIcon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+
+  .transformArrow {
+    margin: 1.5rem 0;
+    padding: 0 1rem;
+  }
+
+  .arrowIcon {
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+  }
+
+  .sectionBadge {
+    font-size: 0.9rem;
+    padding: 0.65rem 1.25rem;
+  }
+
+  .valueStatement {
+    padding: 2rem 1.5rem;
+  }
+
+  .valueContent h3 {
+    font-size: 1.5rem;
+  }
+
+  .valueContent p {
+    font-size: 1rem;
+  }
+
+  .valuePriceAmount {
+    font-size: 2.5rem;
+  }
+
+  .valuePriceTag {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .problemIcon,
+  .solutionIcon {
+    font-size: 2.5rem;
+  }
+
+  .problemCard h3,
+  .solutionCard h3 {
+    font-size: 1rem;
+  }
+
+  .problemCard p,
+  .solutionCard p {
+    font-size: 0.9rem;
+  }
+
+  .valueContent h3 {
+    font-size: 1.25rem;
+  }
+
+  .valuePriceAmount {
+    font-size: 2rem;
+  }
+}
