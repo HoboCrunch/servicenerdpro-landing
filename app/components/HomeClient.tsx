@@ -1,30 +1,17 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import styles from '../page.module.css'
 import Header from './Header'
 import BentoGrid from './BentoGrid'
 import StickyMobileCTA from './StickyMobileCTA'
 import ExitIntentPopup from './ExitIntentPopup'
-import { trackCTAClick, trackTrustBadgeClick } from '../utils/analytics'
-import { getABTestVariant, HERO_HEADLINES, type HeroHeadlineVariant } from '../utils/abtest'
+import { trackCTAClick } from '../utils/analytics'
 import { usePageTracking } from '../hooks/usePageTracking'
 
 export default function HomeClient() {
   // Track page engagement
   usePageTracking()
-
-  // A/B Test: Hero Headline Variations
-  const [heroVariant, setHeroVariant] = useState<HeroHeadlineVariant>('control')
-
-  useEffect(() => {
-    // Assign A/B test variant on client side
-    const variant = getABTestVariant('hero_headline_test')
-    setHeroVariant(variant)
-  }, [])
-
-  const heroContent = HERO_HEADLINES[heroVariant]
 
   return (
     <>
@@ -37,10 +24,10 @@ export default function HomeClient() {
           <div className={styles.container}>
             <div className={styles.heroContent}>
               <h1 className={styles.heroTitle}>
-                {heroContent.headline}
+                Look Premium Online, Book Premium Jobs
               </h1>
               <p className={styles.heroSubtitle}>
-                {heroContent.subheadline}
+                Professional website, branding, and Google presence—delivered in 7 days. Stop losing customers to competitors with better online presence.
               </p>
               <div className={styles.heroValue}>
                 <div className={styles.priceTag}>
