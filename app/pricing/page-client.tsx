@@ -1,11 +1,21 @@
 'use client'
 
+import { useEffect } from 'react'
 import styles from './page.module.css'
 import Header from '../components/Header'
 import Link from 'next/link'
 import PricingCard from './PricingCard'
+import { trackPricingPageView, trackUrgencyBannerView } from '../utils/analytics'
+import { usePageTracking } from '../hooks/usePageTracking'
 
 export default function PricingClient() {
+  // Track page engagement
+  usePageTracking()
+
+  useEffect(() => {
+    trackPricingPageView()
+    trackUrgencyBannerView()
+  }, [])
   const starterPriceId = process.env.NEXT_PUBLIC_STRIPE_STARTER_PRICE_ID || ''
   const proPriceId = process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || ''
   const enterprisePriceId = process.env.NEXT_PUBLIC_STRIPE_ENTERPRISE_PRICE_ID || ''
@@ -50,24 +60,29 @@ export default function PricingClient() {
   return (
     <>
       <Header />
-      <main className={styles.main}>
-        {/* Hero Section */}
-        <section className={styles.hero}>
-          <div className={styles.container}>
-            <div className={styles.heroContent}>
-              <h1 className={styles.heroTitle}>
-                Simple, Transparent Pricing
-              </h1>
-              <p className={styles.heroSubtitle}>
-                No hidden fees. No surprises. Just professional service business marketing that actually works.
-              </p>
+      {/* Urgency Banner */}
+      <section className={styles.urgencyBanner}>
+        <div className={styles.container}>
+          <div className={styles.urgencyContent}>
+            <span className={styles.urgencyIcon}>⚡</span>
+            <div className={styles.urgencyText}>
+              <strong>7-Day Delivery Guarantee</strong> — Start this week, launch next week. If we're late, your first month is free.
             </div>
           </div>
-        </section>
-
+        </div>
+      </section>
+      <main className={styles.main}>
         {/* Pricing Cards */}
         <section className={styles.pricingSection}>
           <div className={styles.container}>
+            <div className={styles.pricingHeader}>
+              <h1 className={styles.pricingTitle}>
+                Simple, Transparent Pricing
+              </h1>
+              <p className={styles.pricingSubtitle}>
+                No hidden fees. No surprises. Just professional service business marketing that actually works.
+              </p>
+            </div>
             <div className={styles.pricingGrid}>
               <PricingCard
                 planName="Starter"
@@ -109,63 +124,6 @@ export default function PricingClient() {
                     Contact Us
                   </button>
                 </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Comparison Table */}
-        <section className={styles.comparisonSection}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Compare Plans</h2>
-            <div className={styles.comparisonTable}>
-              <div className={styles.tableHeader}>
-                <div className={styles.featureColumn}>Features</div>
-                <div className={styles.planColumn}>Starter</div>
-                <div className={styles.planColumn}>Pro</div>
-                <div className={styles.planColumn}>Enterprise</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Website Design</div>
-                <div className={styles.planColumn}>✓</div>
-                <div className={styles.planColumn}>✓</div>
-                <div className={styles.planColumn}>✓</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Branding Package</div>
-                <div className={styles.planColumn}>Basic</div>
-                <div className={styles.planColumn}>Complete</div>
-                <div className={styles.planColumn}>Complete</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Local SEO</div>
-                <div className={styles.planColumn}>—</div>
-                <div className={styles.planColumn}>✓</div>
-                <div className={styles.planColumn}>✓</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Monthly Updates</div>
-                <div className={styles.planColumn}>—</div>
-                <div className={styles.planColumn}>✓</div>
-                <div className={styles.planColumn}>Weekly</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Email Marketing</div>
-                <div className={styles.planColumn}>—</div>
-                <div className={styles.planColumn}>Setup</div>
-                <div className={styles.planColumn}>Full Management</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Social Media</div>
-                <div className={styles.planColumn}>—</div>
-                <div className={styles.planColumn}>Setup</div>
-                <div className={styles.planColumn}>Full Management</div>
-              </div>
-              <div className={styles.tableRow}>
-                <div className={styles.featureColumn}>Support</div>
-                <div className={styles.planColumn}>Email</div>
-                <div className={styles.planColumn}>Email + Chat</div>
-                <div className={styles.planColumn}>Priority + Phone</div>
               </div>
             </div>
           </div>

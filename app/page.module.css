@@ -18,7 +18,7 @@
   background-position: center;
   background-repeat: no-repeat;
   color: white;
-  padding: 6rem 0;
+  padding: 4rem 0;
   text-align: center;
 }
 
@@ -74,23 +74,26 @@
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 12px;
+  padding: 1.25rem 1.75rem;
+  margin-bottom: 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 2rem;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .priceTag {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .priceAmount {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 800;
   color: var(--accent-yellow);
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -98,7 +101,7 @@
 }
 
 .pricePeriod {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
 }
@@ -106,17 +109,17 @@
 .priceDetails {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
   text-align: left;
 }
 
 .priceFeature {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: white;
   font-weight: 500;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .heroTrust {
@@ -131,6 +134,20 @@
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.heroTrustBadge {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  display: inline-block;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .primaryButton {
@@ -231,7 +248,7 @@
 
 /* Features Section */
 .features {
-  padding: 6rem 0;
+  padding: 4rem 0 6rem 0;
   background: #f8fafc;
 }
 
@@ -256,7 +273,8 @@
   text-align: center;
   font-size: 1.125rem;
   color: var(--text-muted);
-  margin-bottom: 4.5rem;
+  margin-bottom: 5rem;
+  margin-top: 1.5rem;
 }
 
 .strikethrough {
@@ -388,20 +406,45 @@
 
 /* Social Proof Section */
 .socialProof {
-  padding: 5rem 0;
-  background: white;
+  padding: 6rem 0;
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 0 rgba(59, 130, 246, 0.08);
 }
 
 .stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 3rem;
+  gap: 2rem;
   margin-top: 3rem;
   text-align: center;
 }
 
 .stat {
+  background: white;
   padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+  border-color: var(--accent-blue);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem auto;
+  color: var(--primary-blue);
+  transition: all 0.3s ease;
+}
+
+.stat:hover .statIcon {
+  transform: scale(1.1);
+  color: var(--accent-orange);
 }
 
 .statNumber {
@@ -409,6 +452,14 @@
   font-weight: 700;
   color: var(--primary-blue);
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.stat:hover .statNumber {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .statLabel {
@@ -416,23 +467,558 @@
   color: var(--text-muted);
 }
 
-/* CTA Section */
-.cta {
-  padding: 6rem 0;
-  background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue-light) 100%);
+/* Trust Badges & Testimonials CTA */
+.trustBadgesCTA {
+  padding: 0;
+  text-align: center;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.trustBadgesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.trustBadges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.trustBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.trustBadge:hover {
+  transform: translateX(2px);
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.trustBadge span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.testimonialsButton {
+  background: var(--primary-blue);
   color: white;
+  padding: 0.875rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.testimonialsButton:hover {
+  background: var(--secondary-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 64, 175, 0.4);
+}
+
+/* Featured Review */
+.featuredReview {
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.featuredReviewContent {
+  background: linear-gradient(135deg, #fff 0%, #fafbfc 100%);
+  padding: 2rem 2.5rem 2rem 2rem;
+  border-radius: 16px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 20px 40px -10px rgba(30, 64, 175, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(249, 115, 22, 0.15);
+}
+
+.featuredReviewContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--accent-orange) 0%, var(--accent-warm) 100%);
+}
+
+.featuredReviewContent:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 24px 48px -12px rgba(30, 64, 175, 0.12);
+  border-color: rgba(249, 115, 22, 0.25);
+}
+
+.featuredReviewLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-shrink: 0;
+  padding-left: 0.75rem;
+}
+
+.featuredReviewAvatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2.5px solid var(--accent-orange);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+  transition: all 0.3s ease;
+}
+
+.featuredReviewContent:hover .featuredReviewAvatar {
+  transform: scale(1.03);
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.3);
+}
+
+.featuredReviewMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.featuredReviewStars {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-bottom: 0.35rem;
+}
+
+.featuredReviewStars svg {
+  flex-shrink: 0;
+}
+
+.featuredReviewAuthor {
+  line-height: 1.2;
+}
+
+.featuredReviewAuthor strong {
+  color: var(--primary-blue-dark);
+  font-weight: 700;
+  font-size: 1.05rem;
+  display: block;
+}
+
+.featuredReviewCompany {
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-block;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 0.15rem;
+}
+
+.featuredReviewCompany:hover {
+  color: var(--primary-blue-dark);
+  text-decoration: underline;
+}
+
+.featuredReviewRight {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.featuredReviewQuote {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #4b5563;
+  font-style: italic;
+  position: relative;
+  z-index: 1;
+  font-weight: 400;
+}
+
+.featuredReviewQuote strong {
+  color: var(--primary-blue-dark);
+  font-weight: 700;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+/* Transition Bridge */
+.transitionBridge {
+  background: linear-gradient(180deg, #ffffff 0%, white 100%);
+  padding: 2rem 0;
   text-align: center;
 }
 
+.transitionText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin: 0;
+  position: relative;
+  display: inline-block;
+}
+
+.transitionText::after {
+  content: '↓';
+  display: block;
+  font-size: 2rem;
+  color: var(--accent-orange);
+  margin-top: 0.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* What Changes Section */
+.whatChanges {
+  padding: 2.5rem 0 6rem 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.sectionSubtitle {
+  text-align: center;
+  font-size: 1.125rem;
+  color: #64748b;
+  margin-bottom: 3rem;
+  margin-top: -0.5rem;
+}
+
+.changesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .changesGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.changeCard {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.changeCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.1);
+  border-color: #3b82f6;
+}
+
+.changeHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.changeIcon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.changeCard h3 {
+  font-size: 1.25rem;
+  color: #1e3a8a;
+  margin: 0;
+  font-weight: 600;
+}
+
+.changeCard p {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* FAQ Section */
+.faq {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+
+.faqItem {
+  text-align: left;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.faqItem:nth-child(odd) {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, rgba(255, 255, 255, 0.98) 100%);
+}
+
+.faqItem:nth-child(even) {
+  background: white;
+}
+
+.faqItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.12);
+  border-color: var(--accent-blue);
+}
+
+.faqItem::before {
+  content: '?';
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--primary-blue) 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+}
+
+.faqItem:hover::before {
+  opacity: 0.25;
+}
+
+.faqQuestion {
+  font-size: 1.25rem;
+  color: var(--primary-blue-dark);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  padding-right: 2.5rem;
+}
+
+.faqAnswer {
+  font-size: 1rem;
+  color: #4b5563;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Enhanced CTA Section */
+.cta {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.95) 0%, rgba(30, 58, 138, 0.95) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.ctaContent {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaBadge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 .ctaTitle {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
+  color: white;
   margin-bottom: 1rem;
+  line-height: 1.2;
+  font-weight: 800;
+  margin-top: 0;
 }
 
 .ctaSubtitle {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+
+.ctaCard {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 20px 40px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.ctaCardHeader {
+  text-align: center;
+  padding-bottom: 2rem;
   margin-bottom: 2rem;
-  color: rgba(255, 255, 255, 0.95);
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.ctaPriceTag {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ctaPriceAmount {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--primary-blue-dark);
+  line-height: 1;
+}
+
+.ctaPricePeriod {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ctaPriceDetails {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.ctaFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.ctaFeature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.ctaFeature:hover {
+  transform: translateX(4px);
+}
+
+.ctaCheckmark {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.3));
+}
+
+.ctaFeatureText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ctaFeatureText strong {
+  font-size: 1.05rem;
+  color: var(--primary-blue-dark);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ctaFeatureText span {
+  font-size: 0.925rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.ctaCardActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 2px solid #f1f5f9;
+}
+
+.ctaCardActions .primaryButton {
+  width: 100%;
+  max-width: 400px;
+  font-size: 1.125rem;
+  padding: 1.125rem 2.5rem;
+}
+
+.ctaTrustIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.ctaTrustIndicator svg {
+  flex-shrink: 0;
 }
 
 /* Footer */
@@ -490,16 +1076,125 @@
 
   .stats {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
-  .container {
-    padding: 0 1rem;
+  .stat {
+    padding: 1.5rem;
+  }
+
+  .statIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .statNumber {
+    font-size: 2.5rem;
+  }
+
+  .trustBadgesCTA {
+    padding: 2rem 0;
+    margin-top: 2rem;
+  }
+
+  .trustBadges {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .trustBadge {
+    justify-content: center;
+  }
+
+  .testimonialsButton {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .featuredReview {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .featuredReviewContent {
+    flex-direction: column;
+    padding: 1.75rem 1.5rem;
+    gap: 1.25rem;
+    text-align: center;
+  }
+
+  .featuredReviewContent::before {
+    width: 100%;
+    height: 4px;
+  }
+
+  .featuredReviewLeft {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .featuredReviewAvatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .featuredReviewMeta {
+    align-items: center;
+  }
+
+  .featuredReviewStars {
+    font-size: 0.875rem;
+  }
+
+  .featuredReviewAuthor strong {
+    font-size: 1rem;
+  }
+
+  .featuredReviewCompany {
+    font-size: 0.8125rem;
+  }
+
+  .featuredReviewQuote {
+    font-size: 0.975rem;
+    line-height: 1.6;
+  }
+
+  .featuredReviewQuote strong {
+    white-space: normal;
+  }
+
+  .transitionBridge {
+    padding: 1.5rem 0;
+  }
+
+  .transitionText {
+    font-size: 1.25rem;
+  }
+
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .heroValue {
+    margin-bottom: 1.5rem;
+  }
+
+  .heroTrustBadge {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.25rem;
+    margin-bottom: 1.25rem;
   }
 
   .trustBarContent {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .container {
+    padding: 0 1rem;
   }
 
   .trustBar {
@@ -522,5 +1217,103 @@
 
   .trustSubtitle {
     font-size: 0.9rem;
+  }
+
+  .faqGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .faqItem {
+    padding: 1.5rem;
+  }
+
+  .faqItem::before {
+    width: 28px;
+    height: 28px;
+    font-size: 1.1rem;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .faqQuestion {
+    font-size: 1.125rem;
+    padding-right: 2rem;
+  }
+
+  .faqAnswer {
+    font-size: 0.95rem;
+  }
+
+  /* Enhanced CTA Mobile Styles */
+  .cta {
+    padding: 4rem 0;
+  }
+
+  .ctaTitle {
+    font-size: 2rem;
+  }
+
+  .ctaSubtitle {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .ctaCard {
+    padding: 2rem 1.5rem;
+  }
+
+  .ctaCardHeader {
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ctaPriceAmount {
+    font-size: 2.75rem;
+  }
+
+  .ctaPricePeriod {
+    font-size: 1.25rem;
+  }
+
+  .ctaPriceDetails {
+    font-size: 0.875rem;
+  }
+
+  .ctaFeatures {
+    gap: 1.25rem;
+  }
+
+  .ctaCheckmark {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+
+  .ctaFeatureText strong {
+    font-size: 0.975rem;
+  }
+
+  .ctaFeatureText span {
+    font-size: 0.875rem;
+  }
+
+  .ctaCardActions {
+    padding-top: 1.5rem;
+  }
+
+  .ctaCardActions .primaryButton {
+    font-size: 1.05rem;
+    padding: 1rem 2rem;
+  }
+
+  .ctaTrustIndicator {
+    font-size: 0.8125rem;
+    text-align: center;
+  }
+
+  .ctaBadge {
+    font-size: 0.8125rem;
+    padding: 0.4rem 1rem;
   }
 }

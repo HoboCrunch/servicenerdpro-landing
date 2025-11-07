@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import styles from './page.module.css'
+import { trackCheckoutInitiated } from '../utils/analytics'
 
 interface PricingCardProps {
   planName: string
@@ -24,6 +25,13 @@ export default function PricingCard({
   const [error, setError] = useState<string | null>(null)
 
   const handleCheckout = () => {
+    console.log('PricingCard - handleCheckout called')
+    console.log('PricingCard - priceId:', priceId)
+    console.log('PricingCard - planName:', planName)
+
+    // Track checkout initiation
+    trackCheckoutInitiated(planName)
+
     // Redirect to embedded checkout page
     const planSlug = planName.toLowerCase().replace('+', '')
     window.location.href = `/checkout?plan=${planSlug}`

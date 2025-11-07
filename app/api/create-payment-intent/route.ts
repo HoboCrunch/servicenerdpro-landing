@@ -41,7 +41,10 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    console.log('Customer created/retrieved:', customer.id)
+
     // Create a subscription with payment pending
+    // Using 'default_incomplete' ensures the subscription waits for payment
     const subscription = await stripe.subscriptions.create({
       customer: customer.id,
       items: [{ price: priceId }],
@@ -56,18 +59,30 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    console.log('Subscription created:', subscription.id)
+
+    // Get the invoice and payment intent
     const invoice = subscription.latest_invoice as any
     const paymentIntent = invoice?.payment_intent
 
-    if (!paymentIntent) {
-      throw new Error('Failed to create payment intent for subscription')
+    console.log('Invoice ID:', invoice?.id)
+    console.log('Invoice status:', invoice?.status)
+    console.log('Payment Intent:', paymentIntent?.id || 'none')
+
+    // Check if we got a payment intent
+    if (paymentIntent && paymentIntent.client_secret) {
+      return NextResponse.json({
+        subscriptionId: subscription.id,
+        clientSecret: paymentIntent.client_secret,
+        customerId: customer.id,
+      })
     }
 
-    return NextResponse.json({
-      subscriptionId: subscription.id,
-      clientSecret: paymentIntent.client_secret,
-      customerId: customer.id,
-    })
+    // If no payment intent was created, there might be an issue with the subscription setup
+    // This can happen if the invoice doesn't require payment (e.g., $0 amount or trial)
+    throw new Error(
+      `No payment intent was created for subscription. Invoice status: ${invoice?.status}, Amount: ${invoice?.amount_due}`
+    )
   } catch (error: any) {
     console.error('Subscription creation error:', error)
     return NextResponse.json(

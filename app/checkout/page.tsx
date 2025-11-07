@@ -14,8 +14,11 @@ function CheckoutContent() {
   const searchParams = useSearchParams()
   const plan = searchParams.get('plan')
   const [clientSecret, setClientSecret] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [email, setEmail] = useState('')
+  const [emailSubmitted, setEmailSubmitted] = useState(false)
+  const [emailError, setEmailError] = useState('')
 
   const planDetails: Record<string, { name: string; price: number; priceId: string }> = {
     starter: {
@@ -32,35 +35,50 @@ function CheckoutContent() {
 
   const selectedPlan = plan ? planDetails[plan] : null
 
-  useEffect(() => {
-    if (!selectedPlan) {
-      setError('Invalid plan selected')
-      setLoading(false)
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setEmailError('')
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email || !emailRegex.test(email)) {
+      setEmailError('Please enter a valid email address')
       return
     }
 
-    // Create Subscription with PaymentIntent as soon as the page loads
-    fetch('/api/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        priceId: selectedPlan.priceId,
-        planName: plan,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          throw new Error(data.error)
-        }
-        setClientSecret(data.clientSecret)
-        setLoading(false)
+    if (!selectedPlan) {
+      setError('Invalid plan selected')
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      // Create Subscription with PaymentIntent
+      const response = await fetch('/api/create-subscription', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          priceId: selectedPlan.priceId,
+          planName: plan,
+          email: email,
+        }),
       })
-      .catch((err) => {
-        setError(err.message || 'Failed to initialize checkout')
-        setLoading(false)
-      })
-  }, [selectedPlan, plan])
+
+      const data = await response.json()
+
+      if (data.error) {
+        throw new Error(data.error)
+      }
+
+      setClientSecret(data.clientSecret)
+      setEmailSubmitted(true)
+      setLoading(false)
+    } catch (err: any) {
+      setError(err.message || 'Failed to initialize checkout')
+      setLoading(false)
+    }
+  }
 
   if (!selectedPlan) {
     return (
@@ -160,26 +178,95 @@ function CheckoutContent() {
                 Subscribe to {selectedPlan.name} - billed monthly, cancel anytime
               </p>
 
-              {loading && (
-                <div className={styles.loadingState}>
-                  <div className={styles.spinner}></div>
-                  <p>Loading secure checkout...</p>
+              {!emailSubmitted ? (
+                // Email capture form
+                <div className={styles.emailCaptureSection}>
+                  <div className={styles.stepIndicator}>
+                    <span className={styles.stepNumber}>1</span>
+                    <span className={styles.stepText}>Enter your email to continue</span>
+                  </div>
+                  <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="email" className={styles.emailLabel}>
+                        Email Address <span className={styles.required}>*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={styles.emailInput}
+                        placeholder="you@example.com"
+                        required
+                        disabled={loading}
+                      />
+                      {emailError && (
+                        <div className={styles.emailError}>{emailError}</div>
+                      )}
+                      <p className={styles.emailHint}>
+                        We'll use this email for your account and order confirmations
+                      </p>
+                    </div>
+                    <button
+                      type="submit"
+                      className={styles.continueButton}
+                      disabled={loading || !email}
+                    >
+                      {loading ? (
+                        <>
+                          <div className={styles.buttonSpinner}></div>
+                          Loading...
+                        </>
+                      ) : (
+                        'Continue to Payment →'
+                      )}
+                    </button>
+                  </form>
                 </div>
-              )}
+              ) : (
+                // Payment form (shown after email is submitted)
+                <>
+                  <div className={styles.stepIndicator}>
+                    <span className={styles.stepNumber}>2</span>
+                    <span className={styles.stepText}>Complete payment</span>
+                  </div>
+                  <div className={styles.emailConfirmation}>
+                    <span className={styles.emailLabel}>Email:</span>
+                    <span className={styles.emailValue}>{email}</span>
+                    <button
+                      onClick={() => {
+                        setEmailSubmitted(false)
+                        setClientSecret('')
+                      }}
+                      className={styles.changeEmailButton}
+                    >
+                      Change
+                    </button>
+                  </div>
 
-              {error && (
-                <div className={styles.errorState}>
-                  <p>{error}</p>
-                  <a href="/pricing" className={styles.backLink}>
-                    ← Back to Pricing
-                  </a>
-                </div>
-              )}
+                  {loading && (
+                    <div className={styles.loadingState}>
+                      <div className={styles.spinner}></div>
+                      <p>Loading secure checkout...</p>
+                    </div>
+                  )}
 
-              {clientSecret && (
-                <Elements options={options} stripe={stripePromise}>
-                  <CheckoutForm planName={selectedPlan.name} />
-                </Elements>
+                  {error && (
+                    <div className={styles.errorState}>
+                      <p>{error}</p>
+                      <a href="/pricing" className={styles.backLink}>
+                        ← Back to Pricing
+                      </a>
+                    </div>
+                  )}
+
+                  {clientSecret && (
+                    <Elements options={options} stripe={stripePromise}>
+                      <CheckoutForm planName={selectedPlan.name} />
+                    </Elements>
+                  )}
+                </>
               )}
 
               <div className={styles.securityBadge}>

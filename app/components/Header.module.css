@@ -73,10 +73,107 @@
   color: rgba(255, 255, 255, 0.9);
   transition: color 0.2s ease;
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .navLink:hover {
   color: var(--accent-yellow);
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdownArrow {
+  transition: transform 0.2s ease;
+}
+
+.dropdown:hover .dropdownArrow {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  min-width: 280px;
+  z-index: 1001;
+  animation: dropdownFadeIn 0.2s ease;
+}
+
+/* Add invisible hover bridge between button and menu */
+.dropdownMenu::after {
+  content: '';
+  position: absolute;
+  top: -0.5rem;
+  left: 0;
+  right: 0;
+  height: 0.5rem;
+  background: transparent;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.dropdownMenu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid white;
+}
+
+.dropdownItem {
+  display: flex;
+  flex-direction: column;
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.dropdownItem:hover {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+.dropdownItemTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e3a8a;
+  margin-bottom: 0.25rem;
+}
+
+.dropdownItemDesc {
+  font-size: 0.875rem;
+  color: #64748b;
+  line-height: 1.4;
 }
 
 .ctaButton {
@@ -120,12 +217,25 @@
     gap: 1rem;
   }
 
+  .dropdown {
+    display: none;
+  }
+
   .navLink {
     display: none;
   }
 
-  .navLink:last-of-type {
-    display: none;
+  .dropdownMenu {
+    left: auto;
+    right: 0;
+    transform: none;
+    min-width: 240px;
+  }
+
+  .dropdownMenu::before {
+    left: auto;
+    right: 20px;
+    transform: none;
   }
 }
 

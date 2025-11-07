@@ -280,6 +280,163 @@
   font-size: 1.125rem;
 }
 
+/* Email Capture */
+.emailCaptureSection {
+  margin-top: 2rem;
+}
+
+.stepIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.stepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.stepText {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.emailForm {
+  margin-top: 1.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.emailLabel {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.emailInput {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.emailInput:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.emailInput:disabled {
+  background: #f1f5f9;
+  cursor: not-allowed;
+}
+
+.emailError {
+  margin-top: 0.5rem;
+  color: #ef4444;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.emailHint {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #64748b;
+  font-style: italic;
+}
+
+.continueButton {
+  width: 100%;
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  color: white;
+  padding: 1.125rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.continueButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+}
+
+.continueButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.emailConfirmation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.emailConfirmation .emailLabel {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.emailValue {
+  flex: 1;
+  font-weight: 600;
+  color: #334155;
+  font-size: 1rem;
+}
+
+.changeEmailButton {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  color: #f97316;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.changeEmailButton:hover {
+  background: #fef3f2;
+  border-color: #f97316;
+}
+
 /* Responsive */
 @media (max-width: 968px) {
   .checkoutWrapper {
@@ -307,5 +464,10 @@
 
   .title {
     font-size: 1.75rem;
+  }
+
+  .emailConfirmation {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
