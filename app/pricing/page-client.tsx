@@ -27,18 +27,16 @@ export default function PricingClient() {
     { text: '✓ 24/7 Support', included: true },
     { text: '✗ Multi-Page Website', included: false },
     { text: '✗ Local SEO Optimization', included: false },
-    { text: '✗ Review Management', included: false },
     { text: '✗ Brand Assets Package', included: false },
     { text: '✗ Monthly Strategy Sessions', included: false },
   ]
 
   const proFeatures = [
-    { text: '✓ Everything in Starter, plus:', included: true },
+    { text: '✓ Everything in Lite, plus:', included: true },
     { text: '✓ Unlimited Pages (5+ pages included)', included: true },
     { text: '✓ Logo, Brand Colors & Brand Assets', included: true },
     { text: '✓ Organic SEO Optimization', included: true },
     { text: '✓ Local Search Optimization', included: true },
-    { text: '✓ Review Management System', included: true },
     { text: '✓ Social Media Templates & Ad Templates', included: true },
     { text: '✓ Brand Images', included: true },
     { text: '✓ Monthly 30min Marketing Strategy Session', included: true },
@@ -48,9 +46,9 @@ export default function PricingClient() {
   const enterpriseFeatures = [
     { text: '✓ Custom solution tailored to your needs', included: true },
     { text: '✓ Multi-Location Support', included: true },
-    { text: '✓ Advanced Analytics & Reporting', included: true },
-    { text: '✓ Paid Advertising Management', included: true },
-    { text: '✓ Social Media Management', included: true },
+    { text: '✓ Advanced Website Features', included: true },
+    { text: '✓ Comprehensive Brand System', included: true },
+    { text: '✓ Enhanced SEO & Local Optimization', included: true },
     { text: '✓ Dedicated Account Manager', included: true },
     { text: '✓ Priority Support', included: true },
     { text: '✓ Custom Integrations', included: true },
@@ -85,7 +83,7 @@ export default function PricingClient() {
             </div>
             <div className={styles.pricingGrid}>
               <PricingCard
-                planName="Starter"
+                planName="Lite"
                 price={99}
                 description="Perfect for solo service pros just getting started"
                 features={starterFeatures}
@@ -136,11 +134,11 @@ export default function PricingClient() {
             <div className={styles.faqGrid}>
               <div className={styles.faqItem}>
                 <h3>Can I cancel anytime?</h3>
-                <p>Yes! All plans are month-to-month with no long-term contracts. Cancel anytime with 30 days notice.</p>
+                <p>Yes! All plans are month-to-month with no long-term contracts. Cancel anytime—cancellations take effect at the end of your current billing cycle.</p>
               </div>
               <div className={styles.faqItem}>
                 <h3>Do you offer refunds?</h3>
-                <p>We offer a 30-day money-back guarantee. If you're not satisfied in your first month, we'll refund you in full.</p>
+                <p>We offer a 30-day money-back guarantee. If you cancel within the first 30 days of your initial signup, you're eligible for a full refund.</p>
               </div>
               <div className={styles.faqItem}>
                 <h3>How long until my website is live?</h3>
@@ -148,7 +146,7 @@ export default function PricingClient() {
               </div>
               <div className={styles.faqItem}>
                 <h3>What if I need custom features?</h3>
-                <p>Enterprise clients get custom integrations included. For Starter and Pro plans, we offer custom development at an hourly rate.</p>
+                <p>Enterprise clients get custom integrations included. For Lite and Pro+ plans, we offer custom development at an hourly rate.</p>
               </div>
               <div className={styles.faqItem}>
                 <h3>Do I own the website and brand assets?</h3>
@@ -167,7 +165,7 @@ export default function PricingClient() {
           <div className={styles.container}>
             <h2 className={styles.ctaTitle}>Ready to Grow Your Service Business?</h2>
             <p className={styles.ctaSubtitle}>
-              Join 10,000+ service professionals who trust Service Nerd Pro
+              Join 100+ service professionals who trust Service Pro
             </p>
             <div className={styles.ctaButtons}>
               <Link href="#pricing">

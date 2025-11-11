@@ -18,7 +18,7 @@ Your complete purchase flow is now set up: **Purchase → Pay with Stripe → On
 
 ### 3. **Updated Pages**
 - **`/pricing`** - Interactive pricing cards with Stripe checkout
-  - Starter: $99/month
+  - Lite: $99/month
   - Pro: $199/month (Featured)
   - Enterprise: $399/month
 
@@ -47,7 +47,7 @@ Follow the detailed guide in `STRIPE_SETUP.md`, but here's the TL;DR:
 # 2. Get API keys from dashboard.stripe.com/apikeys
 
 # 3. Create 3 products in Stripe Dashboard:
-#    - Starter ($99/mo)
+#    - Lite ($99/mo)
 #    - Pro ($199/mo)
 #    - Enterprise ($399/mo)
 

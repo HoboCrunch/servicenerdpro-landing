@@ -11,10 +11,13 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.95) 0%, rgba(147, 51, 234, 0.95) 100%);
+  background:
+    linear-gradient(135deg, rgba(30, 64, 175, 0.6) 0%, rgba(30, 58, 138, 0.6) 100%),
+    url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/branding.webp') center center / cover no-repeat;
   color: white;
   padding: 6rem 0;
   text-align: center;
+  position: relative;
 }
 
 .heroContent {
@@ -122,7 +125,7 @@
 .problemCard {
   background: white;
   border: 2px solid #93c5fd;
-  border-top: 5px solid #a855f7;
+  border-top: 5px solid #3b82f6;
   border-radius: 16px;
   padding: 0;
   text-align: center;
@@ -164,7 +167,7 @@
 .problemCard:hover {
   transform: translateY(-8px);
   box-shadow: 0 16px 40px rgba(30, 64, 175, 0.15);
-  border-color: #a855f7;
+  border-color: #3b82f6;
 }
 
 .problemCard:hover::before {
@@ -174,7 +177,7 @@
 .problemIcon {
   width: 100%;
   aspect-ratio: 16 / 10.8;
-  background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #f3e8ff 100%);
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #dbeafe 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,7 +223,7 @@
   left: 5%;
   right: 5%;
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, #f3e8ff 20%, #e9d5ff 50%, #f3e8ff 80%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, #e0f2fe 20%, #bfdbfe 50%, #e0f2fe 80%, transparent 100%);
 }
 
 .problemCard h3 {
@@ -261,6 +264,240 @@
   margin-top: 3rem;
 }
 
+.brandComponentsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.brandComponentCard {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid #e2e8f0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.brandComponentCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(30, 64, 175, 0.2);
+  border-color: #3b82f6;
+}
+
+.componentVisual {
+  height: 200px;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.componentVisual::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+}
+
+.logoPreview {
+  position: relative;
+  z-index: 1;
+}
+
+.logoCollage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.logoSvg {
+  width: 100%;
+  height: auto;
+  max-width: 70px;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
+  transition: all 0.3s ease;
+  animation: float 4s ease-in-out infinite;
+}
+
+.logoSvg:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.logoSvg:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.logoSvg:nth-child(3) {
+  animation-delay: 2s;
+}
+
+.logoSvg:nth-child(4) {
+  animation-delay: 3s;
+}
+
+.logoSvg:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.colorPalette {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.colorSwatch {
+  width: 70px;
+  height: 70px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.typographyPreview {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.fontDisplay {
+  font-size: 6rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+}
+
+.fontSubtext {
+  font-size: 1.25rem;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.brandGuidePreview {
+  position: relative;
+  z-index: 1;
+}
+
+.guidePages {
+  display: flex;
+  gap: 0.75rem;
+  perspective: 1000px;
+}
+
+.guidePage {
+  width: 80px;
+  height: 110px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 2px solid #e2e8f0;
+  transform: rotateY(-10deg);
+  transition: all 0.3s ease;
+}
+
+.guidePage:nth-child(2) {
+  transform: rotateY(0deg) scale(1.1);
+  z-index: 2;
+  box-shadow: 0 12px 32px rgba(30, 64, 175, 0.3);
+  border-color: #3b82f6;
+}
+
+.guidePage:nth-child(3) {
+  transform: rotateY(10deg);
+}
+
+.businessCardPreview {
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  width: 200px;
+  height: 120px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(30, 58, 138, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotate 15s linear infinite;
+}
+
+.socialMediaPreview {
+  position: relative;
+  z-index: 1;
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.socialPost {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+  transition: all 0.3s ease;
+}
+
+.socialPost:hover {
+  transform: scale(1.05);
+}
+
+.componentContent {
+  padding: 2rem;
+}
+
+.deliverablesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.deliverablesList span {
+  font-size: 0.875rem;
+  color: #2563eb;
+  font-weight: 600;
+  padding: 0.4rem 0.9rem;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  border-radius: 20px;
+  border: 1px solid #93c5fd;
+}
+
 .featureCard {
   background: #f8fafc;
   padding: 1.5rem;
@@ -271,8 +508,8 @@
 
 .featureCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(168, 85, 247, 0.15);
-  border-color: #a855f7;
+  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.15);
+  border-color: #3b82f6;
 }
 
 .featureHeader {
@@ -302,6 +539,19 @@
   font-size: 0.95rem;
 }
 
+.componentContent .featureHeader h3 {
+  font-size: 1.375rem;
+  color: #1e3a8a;
+  font-weight: 700;
+}
+
+.componentContent p {
+  color: #64748b;
+  line-height: 1.7;
+  margin: 0;
+  font-size: 0.975rem;
+}
+
 /* CTA Banner */
 .ctaBanner {
   padding: 0 0 4rem 0;
@@ -309,12 +559,12 @@
 }
 
 .ctaBannerContent {
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   text-align: center;
   color: white;
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3);
+  box-shadow: 0 8px 32px rgba(30, 64, 175, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -430,7 +680,7 @@
 
 .arrow {
   font-size: 2.5rem;
-  color: #a855f7;
+  color: #3b82f6;
   font-weight: 700;
 }
 
@@ -473,8 +723,8 @@
 
 .processStep:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(168, 85, 247, 0.1);
-  border-color: #a855f7;
+  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.1);
+  border-color: #3b82f6;
 }
 
 .stepNumber {
@@ -484,7 +734,7 @@
   transform: translateX(-50%);
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -492,7 +742,7 @@
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
   border: 3px solid white;
 }
 
@@ -532,11 +782,11 @@
   height: 20px;
   min-width: 20px;
   margin-top: 2px;
-  filter: drop-shadow(0 2px 4px rgba(168, 85, 247, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(30, 64, 175, 0.3));
 }
 
 .proHighlight {
-  color: #a855f7;
+  color: #2563eb;
   font-weight: 600;
 }
 
@@ -546,7 +796,7 @@
 
 .processArrow {
   font-size: 2rem;
-  color: #a855f7;
+  color: #3b82f6;
   font-weight: 700;
   align-self: center;
 }
@@ -568,14 +818,14 @@
   background: white;
   padding: 2rem;
   border-radius: 12px;
-  border-left: 4px solid #a855f7;
+  border-left: 4px solid #3b82f6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .testimonialCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(168, 85, 247, 0.1);
+  box-shadow: 0 8px 16px rgba(30, 64, 175, 0.1);
 }
 
 .testimonialQuote {
@@ -618,7 +868,7 @@
 .statNumber {
   font-size: 3rem;
   font-weight: 700;
-  color: #9333ea;
+  color: #2563eb;
   margin-bottom: 0.5rem;
 }
 
@@ -630,7 +880,12 @@
 /* CTA Section */
 .cta {
   padding: 6rem 0;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  background:
+    linear-gradient(135deg, rgba(30, 58, 138, 0.5) 0%, rgba(30, 64, 175, 0.5) 100%),
+    url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/blueprint-blank.webp');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
   color: white;
   text-align: center;
 }
@@ -688,8 +943,36 @@
     font-size: 0.9375rem;
   }
 
-  .featureGrid {
+  .featureGrid,
+  .brandComponentsGrid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .componentVisual {
+    height: 160px;
+  }
+
+  .logoSvg {
+    max-width: 55px;
+  }
+
+  .colorSwatch {
+    width: 55px;
+    height: 55px;
+  }
+
+  .fontDisplay {
+    font-size: 4rem;
+  }
+
+  .card {
+    width: 160px;
+    height: 96px;
+  }
+
+  .componentContent {
+    padding: 1.5rem;
   }
 
   .arrow {

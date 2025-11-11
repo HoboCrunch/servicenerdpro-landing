@@ -33,23 +33,45 @@
   justify-content: center;
   margin: 0 auto 2rem;
   box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .title {
   font-size: 2rem;
   color: #1e3a8a;
   margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .message {
   font-size: 1.125rem;
   color: #334155;
   margin-bottom: 1rem;
+  line-height: 1.6;
 }
 
 .details {
   font-size: 1rem;
   color: #64748b;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.deliveryNote {
+  font-size: 1.125rem;
+  color: #f97316;
+  font-weight: 600;
   margin-bottom: 2rem;
 }
 
@@ -57,8 +79,9 @@
   text-decoration: none;
 }
 
-.homeButton {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+.homeButton,
+.completeButton {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
   color: white;
   padding: 1rem 2.5rem;
   border: none;
@@ -67,37 +90,27 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
 }
 
-.homeButton:hover {
+.homeButton:hover,
+.completeButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
 }
 
-.spinner {
-  width: 80px;
-  height: 80px;
-  border: 6px solid rgba(249, 115, 22, 0.1);
-  border-top: 6px solid #f97316;
-  border-radius: 50%;
-  margin: 0 auto 2rem;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.error {
-  color: #ef4444;
-  font-size: 0.95rem;
+.laterLink {
+  display: inline-block;
   margin-top: 1rem;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.laterLink:hover {
+  color: #334155;
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {
@@ -119,8 +132,15 @@
     font-size: 2rem;
   }
 
-  .spinner {
-    width: 60px;
-    height: 60px;
+  .message {
+    font-size: 1rem;
+  }
+
+  .details {
+    font-size: 0.95rem;
+  }
+
+  .deliveryNote {
+    font-size: 1rem;
   }
 }

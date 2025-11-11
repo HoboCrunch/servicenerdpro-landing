@@ -1,0 +1,104 @@
+.container {
+  min-height: 100vh;
+  padding-top: 80px;
+  background: var(--primary-blue-dark);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  padding: 60px 2rem 80px;
+}
+
+.content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.lastUpdated {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 16px;
+  margin-top: 32px;
+}
+
+.section h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-blue-light);
+  margin-bottom: 12px;
+  margin-top: 24px;
+}
+
+.section p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--foreground);
+  margin-bottom: 16px;
+}
+
+.section ul {
+  margin-left: 24px;
+  margin-bottom: 16px;
+}
+
+.section li {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--foreground);
+  margin-bottom: 8px;
+}
+
+.section a {
+  color: var(--primary-blue-light);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.section a:hover {
+  color: var(--accent-orange);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 80px;
+  }
+
+  .content {
+    padding: 40px 1.5rem 60px;
+  }
+
+  .content h1 {
+    font-size: 2rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .section h3 {
+    font-size: 1.2rem;
+  }
+
+  .section p,
+  .section li {
+    font-size: 1rem;
+  }
+}

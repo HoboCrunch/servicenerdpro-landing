@@ -9,7 +9,7 @@ CREATE TABLE users (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   email TEXT UNIQUE NOT NULL,
   stripe_customer_id TEXT UNIQUE,
-  plan TEXT, -- 'Starter' or 'Pro+'
+  plan TEXT, -- 'Lite' or 'Pro+'
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

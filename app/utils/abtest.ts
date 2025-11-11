@@ -20,7 +20,7 @@ export const HERO_HEADLINES: Record<HeroHeadlineVariant, HeroHeadlineTest> = {
   variant_a: {
     variant: 'variant_a',
     headline: 'Premium Website, Premium Prices',
-    subheadline: 'Join 500+ service pros who raised their prices 38% on average with a professional online presence. Delivered in 7 days.',
+    subheadline: 'Join 100+ service pros who raised their prices 38% on average with a professional online presence. Delivered in 7 days.',
   },
   variant_b: {
     variant: 'variant_b',

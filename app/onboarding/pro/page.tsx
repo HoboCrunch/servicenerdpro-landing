@@ -2,6 +2,7 @@
 
 import { useState, FormEvent, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import Header from '@/app/components/Header'
 import styles from './page.module.css'
 
@@ -9,11 +10,16 @@ function ProOnboardingForm() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
 
+  // Get pre-filled data from URL params
+  const prefilledEmail = searchParams.get('email') || ''
+  const prefilledName = searchParams.get('name') || ''
+  const prefilledBusinessName = searchParams.get('businessName') || ''
+
   const [formData, setFormData] = useState({
     // Business Information
-    businessName: '',
-    ownerName: '',
-    email: '',
+    businessName: prefilledBusinessName,
+    ownerName: prefilledName,
+    email: prefilledEmail,
     phone: '',
     businessType: '',
     businessAddress: '',
@@ -27,12 +33,7 @@ function ProOnboardingForm() {
     websiteGoals: '',
     keyDifferentiators: '',
     pageRequirements: '',
-
-    // SEO & Local Search
-    primaryKeywords: '',
-    competitorNames: '',
-    googleBusinessExists: 'no',
-    googleBusinessEmail: '',
+    socialMediaAccounts: '',
 
     // Branding Preferences (Pro+ gets full package)
     brandColors: '',
@@ -44,15 +45,10 @@ function ProOnboardingForm() {
     reviewPlatforms: [] as string[],
     currentReviewStrategy: '',
 
-    // Social Media & Marketing
-    socialMediaAccounts: '',
-    marketingGoals: '',
-    adBudget: '',
-
     // Business Cards (Free with Pro+)
-    cardName: '',
+    cardName: prefilledName,
     cardTitle: '',
-    cardEmail: '',
+    cardEmail: prefilledEmail,
     cardPhone: '',
     mailingAddress: '',
 
@@ -126,34 +122,82 @@ function ProOnboardingForm() {
       <Header />
       <main className={styles.main}>
         <div className={styles.container}>
-          <div className={styles.header}>
-            <div className={styles.successIcon}>🎉</div>
-            <div className={styles.premiumBadge}>
-              ⭐ Pro+ Plan
-            </div>
-            <h1 className={styles.title}>Welcome to ServiceNerd Pro+!</h1>
-            <p className={styles.subtitle}>Your payment was successful. Let's build your complete digital presence.</p>
-            <p className={styles.deliveryPromise}>⚡ Premium website live in 7 days + Full brand package</p>
-          </div>
+          {success ? (
+            <div className={styles.thankYouContainer}>
+              <h1 className={styles.thankYouTitle}>Thank You! Your Service Nerd <span style={{ color: '#f97316' }}>Pro<sup>+</sup></span> Journey Starts Now</h1>
+              <p className={styles.thankYouSubtitle}>
+                Your payment was successful. Our team is ready to build your complete digital presence!
+              </p>
+              <p className={styles.deliveryPromise}>Premium website live in 7 days + Full brand package</p>
 
-          <div className={styles.formCard}>
-            {success ? (
-              <div className={styles.successMessage}>
-                <h3>🎊 Thank You! Your Pro+ Journey Starts Now</h3>
-                <p>Our team will start working on your complete digital marketing package immediately. You'll receive an email within 24 hours with:</p>
-                <ul style={{ textAlign: 'left', marginTop: '1rem', paddingLeft: '2rem' }}>
-                  <li>Access to your project dashboard</li>
-                  <li>Your dedicated account manager's contact info</li>
-                  <li>Schedule link for your first strategy session</li>
-                  <li>Business card design proof within 48 hours</li>
-                </ul>
-                <p style={{ marginTop: '1rem' }}>Check your inbox at <strong>{formData.email}</strong></p>
+              <div className={styles.nextStepsCard}>
+                <h2 className={styles.nextStepsTitle}>Next Steps</h2>
+
+                <div className={styles.stepItem}>
+                  <div className={styles.stepNumber}>1</div>
+                  <div className={styles.stepContent}>
+                    <h3 className={styles.stepHeading}>Schedule Your Onboarding Call</h3>
+                    <p className={styles.stepDescription}>
+                      Pick a time that works for you to discuss your project details and goals.
+                    </p>
+                    <a
+                      href={process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_BOOKING_URL || 'https://calendar.google.com'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.scheduleButton}
+                    >
+                      Schedule Your Call
+                    </a>
+                  </div>
+                </div>
+
+                <div className={styles.stepItem}>
+                  <div className={styles.stepNumber}>2</div>
+                  <div className={styles.stepContent}>
+                    <h3 className={styles.stepHeading}>Check Your Inbox</h3>
+                    <p className={styles.stepDescription}>
+                      We'll send follow-up details to <strong>{formData.email || 'your email'}</strong> within 24 hours with your project dashboard access and account manager info.
+                    </p>
+                  </div>
+                </div>
+
+                <div className={styles.stepItem}>
+                  <div className={styles.stepNumber}>3</div>
+                  <div className={styles.stepContent}>
+                    <h3 className={styles.stepHeading}>Questions?</h3>
+                    <p className={styles.stepDescription}>
+                      Contact us anytime at{' '}
+                      <a href="mailto:contact@servicenerdpro.com" className={styles.emailLink}>
+                        contact@servicenerdpro.com
+                      </a>
+                    </p>
+                  </div>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                {error && (
-                  <div className={styles.errorMessage}>
-                    {error}
+
+              <div className={styles.finalMessage}>
+                <p className={styles.finalMessageText}>
+                  <strong>Your online presence is on the way!</strong> We're excited to help you grow your business.
+                </p>
+              </div>
+
+              <Link href="/" className={styles.homeLink}>
+                ← Return to Home
+              </Link>
+            </div>
+          ) : (
+            <>
+              <div className={styles.header}>
+                <h1 className={styles.title}>Welcome to Service Nerd <span style={{ color: '#fbbf24' }}>Pro<sup>+</sup></span></h1>
+                <p className={styles.subtitle}>Your payment was successful. Let's build your complete digital presence.</p>
+                <p className={styles.deliveryPromise}>⚡ Premium website live in 7 days + Full brand package</p>
+              </div>
+
+              <div className={styles.formCard}>
+                <form onSubmit={handleSubmit}>
+                  {error && (
+                    <div className={styles.errorMessage}>
+                      {error}
                   </div>
                 )}
 
@@ -173,7 +217,7 @@ function ProOnboardingForm() {
                     <span className={styles.sectionIcon}>🏢</span>
                     Business Information
                   </h2>
-                  <p className={styles.sectionDescription}>Tell us about your service business</p>
+                  <p className={styles.sectionDescription}>Tell us about your service business and website needs</p>
 
                   <div className={styles.formGrid}>
                     <div className={styles.formGroup}>
@@ -313,18 +357,7 @@ function ProOnboardingForm() {
                         />
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Website Content & Structure */}
-                <div className={styles.formSection}>
-                  <h2 className={styles.sectionTitle}>
-                    <span className={styles.sectionIcon}>🌐</span>
-                    Multi-Page Website Content
-                  </h2>
-                  <p className={styles.sectionDescription}>Pro+ includes 5+ pages - let's plan your site structure</p>
-
-                  <div className={styles.formGrid}>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>
                         Business Description <span className={styles.required}>*</span>
@@ -352,7 +385,7 @@ function ProOnboardingForm() {
                         placeholder="List all services in detail - we'll create dedicated pages for each..."
                         required
                       />
-                      <span className={styles.helpText}>Be comprehensive - each major service gets its own page</span>
+                      <span className={styles.helpText}>Be comprehensive - each major service gets its own page (Pro+ includes 5+ pages)</span>
                     </div>
 
                     <div className={styles.formGroup}>
@@ -411,82 +444,21 @@ function ProOnboardingForm() {
                         required
                       />
                     </div>
-                  </div>
-                </div>
 
-                {/* SEO & Local Search */}
-                <div className={styles.formSection}>
-                  <h2 className={styles.sectionTitle}>
-                    <span className={styles.sectionIcon}>🔍</span>
-                    SEO & Local Search Optimization
-                  </h2>
-                  <p className={styles.sectionDescription}>Let's get you found on Google</p>
-
-                  <div className={styles.formGrid}>
                     <div className={styles.formGroup}>
                       <label className={styles.label}>
-                        Primary Keywords <span className={styles.required}>*</span>
+                        Social Media Links
                       </label>
                       <input
                         type="text"
-                        name="primaryKeywords"
-                        value={formData.primaryKeywords}
+                        name="socialMediaAccounts"
+                        value={formData.socialMediaAccounts}
                         onChange={handleChange}
                         className={styles.input}
-                        placeholder="e.g., Dallas plumber, emergency plumbing Dallas, 24/7 plumber"
-                        required
+                        placeholder="e.g., Facebook: @eliteplumbing, Instagram: @eliteplumbing"
                       />
-                      <span className={styles.helpText}>What do customers search for when looking for your services?</span>
+                      <span className={styles.helpText}>We'll create custom graphics for your social accounts</span>
                     </div>
-
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Main Competitors
-                      </label>
-                      <input
-                        type="text"
-                        name="competitorNames"
-                        value={formData.competitorNames}
-                        onChange={handleChange}
-                        className={styles.input}
-                        placeholder="List 3-5 direct competitors (business names)"
-                      />
-                      <span className={styles.helpText}>Helps us understand your competitive landscape</span>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Do you have a Google Business Profile? <span className={styles.required}>*</span>
-                      </label>
-                      <select
-                        name="googleBusinessExists"
-                        value={formData.googleBusinessExists}
-                        onChange={handleChange}
-                        className={styles.select}
-                        required
-                      >
-                        <option value="no">No, please help me set one up</option>
-                        <option value="yes">Yes, I have one</option>
-                        <option value="unsure">I'm not sure</option>
-                      </select>
-                    </div>
-
-                    {formData.googleBusinessExists === 'yes' && (
-                      <div className={styles.formGroup}>
-                        <label className={styles.label}>
-                          Google Business Profile Email
-                        </label>
-                        <input
-                          type="email"
-                          name="googleBusinessEmail"
-                          value={formData.googleBusinessEmail}
-                          onChange={handleChange}
-                          className={styles.input}
-                          placeholder="Email used for Google Business"
-                        />
-                        <span className={styles.helpText}>We'll need access to optimize it</span>
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -561,171 +533,6 @@ function ProOnboardingForm() {
                         placeholder="List any competitor or industry websites you admire (URLs or business names)"
                       />
                       <span className={styles.helpText}>Helps us understand your style preferences</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Review Management */}
-                <div className={styles.formSection}>
-                  <h2 className={styles.sectionTitle}>
-                    <span className={styles.sectionIcon}>⭐</span>
-                    Review Management System
-                  </h2>
-                  <p className={styles.sectionDescription}>Let's build your online reputation</p>
-
-                  <div className={styles.formGrid}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Which review platforms do you use? <span className={styles.required}>*</span>
-                      </label>
-                      <div className={styles.checkboxGroup}>
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="reviewPlatforms"
-                            value="google"
-                            checked={formData.reviewPlatforms.includes('google')}
-                            onChange={handleChange}
-                            className={styles.checkbox}
-                          />
-                          <div className={styles.checkboxText}>
-                            <div className={styles.checkboxTitle}>Google Reviews</div>
-                            <div className={styles.checkboxDescription}>Most important for local SEO</div>
-                          </div>
-                        </label>
-
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="reviewPlatforms"
-                            value="yelp"
-                            checked={formData.reviewPlatforms.includes('yelp')}
-                            onChange={handleChange}
-                            className={styles.checkbox}
-                          />
-                          <div className={styles.checkboxText}>
-                            <div className={styles.checkboxTitle}>Yelp</div>
-                            <div className={styles.checkboxDescription}>Popular for home services</div>
-                          </div>
-                        </label>
-
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="reviewPlatforms"
-                            value="facebook"
-                            checked={formData.reviewPlatforms.includes('facebook')}
-                            onChange={handleChange}
-                            className={styles.checkbox}
-                          />
-                          <div className={styles.checkboxText}>
-                            <div className={styles.checkboxTitle}>Facebook</div>
-                            <div className={styles.checkboxDescription}>Social proof and visibility</div>
-                          </div>
-                        </label>
-
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="reviewPlatforms"
-                            value="bbb"
-                            checked={formData.reviewPlatforms.includes('bbb')}
-                            onChange={handleChange}
-                            className={styles.checkbox}
-                          />
-                          <div className={styles.checkboxText}>
-                            <div className={styles.checkboxTitle}>Better Business Bureau</div>
-                            <div className={styles.checkboxDescription}>Trust and credibility</div>
-                          </div>
-                        </label>
-
-                        <label className={styles.checkboxLabel}>
-                          <input
-                            type="checkbox"
-                            name="reviewPlatforms"
-                            value="other"
-                            checked={formData.reviewPlatforms.includes('other')}
-                            onChange={handleChange}
-                            className={styles.checkbox}
-                          />
-                          <div className={styles.checkboxText}>
-                            <div className={styles.checkboxTitle}>Other</div>
-                            <div className={styles.checkboxDescription}>Specify in additional notes</div>
-                          </div>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Current Review Strategy
-                      </label>
-                      <textarea
-                        name="currentReviewStrategy"
-                        value={formData.currentReviewStrategy}
-                        onChange={handleChange}
-                        className={styles.textarea}
-                        placeholder="How do you currently ask customers for reviews? What's working or not working?"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social Media & Marketing */}
-                <div className={styles.formSection}>
-                  <h2 className={styles.sectionTitle}>
-                    <span className={styles.sectionIcon}>📱</span>
-                    Social Media & Marketing Assets
-                  </h2>
-                  <p className={styles.sectionDescription}>Templates and ad creatives for your campaigns</p>
-
-                  <div className={styles.formGrid}>
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Social Media Accounts
-                      </label>
-                      <input
-                        type="text"
-                        name="socialMediaAccounts"
-                        value={formData.socialMediaAccounts}
-                        onChange={handleChange}
-                        className={styles.input}
-                        placeholder="e.g., Facebook: @eliteplumbing, Instagram: @eliteplumbing"
-                      />
-                      <span className={styles.helpText}>We'll create custom graphics for your accounts</span>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Marketing Goals
-                      </label>
-                      <textarea
-                        name="marketingGoals"
-                        value={formData.marketingGoals}
-                        onChange={handleChange}
-                        className={styles.textarea}
-                        placeholder="What are your marketing priorities? (e.g., more leads, brand awareness, seasonal promotions...)"
-                      />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                      <label className={styles.label}>
-                        Advertising Budget (if any)
-                      </label>
-                      <select
-                        name="adBudget"
-                        value={formData.adBudget}
-                        onChange={handleChange}
-                        className={styles.select}
-                      >
-                        <option value="">Select budget range...</option>
-                        <option value="none">Not advertising yet</option>
-                        <option value="under-500">Under $500/month</option>
-                        <option value="500-1000">$500 - $1,000/month</option>
-                        <option value="1000-2500">$1,000 - $2,500/month</option>
-                        <option value="2500-plus">$2,500+/month</option>
-                      </select>
-                      <span className={styles.helpText}>Helps us create appropriate ad templates</span>
                     </div>
                   </div>
                 </div>
@@ -939,16 +746,17 @@ function ProOnboardingForm() {
                   </div>
                 </div>
 
-                <button
-                  type="submit"
-                  className={styles.submitButton}
-                  disabled={loading}
-                >
-                  {loading ? 'Submitting...' : '🚀 Submit & Start My Pro+ Journey'}
-                </button>
-              </form>
-            )}
-          </div>
+                  <button
+                    type="submit"
+                    className={styles.submitButton}
+                    disabled={loading}
+                  >
+                    {loading ? 'Submitting...' : '🚀 Submit & Start My Pro+ Journey'}
+                  </button>
+                </form>
+              </div>
+            </>
+          )}
         </div>
       </main>
     </>

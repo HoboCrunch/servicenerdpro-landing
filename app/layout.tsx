@@ -1,21 +1,29 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import Footer from './components/Footer'
 import './globals.css'
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+}
+
 export const metadata: Metadata = {
-  title: 'ServiceNerd Pro - Professional Websites for Service Businesses',
+  title: 'Service Pro+ - Professional Websites for Service Businesses',
   description: 'Get a professional website, branding, and Google presence for your service business—delivered in 7 days. $199/month. No $5,000 upfront fees. No tech skills required.',
   keywords: ['service business website', 'contractor website', 'small business website', 'professional branding', 'local SEO', 'website design'],
-  authors: [{ name: 'ServiceNerd Pro' }],
+  authors: [{ name: 'Service Pro+' }],
   openGraph: {
-    title: 'ServiceNerd Pro - Professional Websites for Service Businesses',
+    title: 'Service Pro+ - Professional Websites for Service Businesses',
     description: 'Stop losing customers to online competition. Get your website, branding, and Google presence in 7 days for $199/month.',
     type: 'website',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ServiceNerd Pro - Professional Websites for Service Businesses',
+    title: 'Service Pro+ - Professional Websites for Service Businesses',
     description: 'Website, branding, and Google presence delivered in 7 days. $199/month.',
   },
   icons: {
@@ -47,7 +55,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, Suspense, ReactNode } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
@@ -10,24 +10,32 @@ import styles from './page.module.css'
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
+type Step = 'email' | 'payment'
+
 function CheckoutContent() {
   const searchParams = useSearchParams()
   const plan = searchParams.get('plan')
+
+  const [currentStep, setCurrentStep] = useState<Step>('email')
   const [clientSecret, setClientSecret] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
+  const [businessName, setBusinessName] = useState('')
   const [emailSubmitted, setEmailSubmitted] = useState(false)
   const [emailError, setEmailError] = useState('')
 
-  const planDetails: Record<string, { name: string; price: number; priceId: string }> = {
-    starter: {
-      name: 'Starter',
+  const planDetails: Record<string, { name: string; displayName: ReactNode; price: number; priceId: string }> = {
+    lite: {
+      name: 'Service Pro Lite',
+      displayName: <span style={{ whiteSpace: 'nowrap' }}>Service <span style={{ color: '#3b82f6' }}>Pro Lite</span></span>,
       price: 99,
       priceId: process.env.NEXT_PUBLIC_STRIPE_STARTER_PRICE_ID || '',
     },
     pro: {
-      name: 'Pro+',
+      name: 'Service Pro+',
+      displayName: <span style={{ whiteSpace: 'nowrap' }}>Service <span style={{ color: '#f97316' }}>Pro<sup>+</sup></span></span>,
       price: 199,
       priceId: process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID || '',
     },
@@ -35,11 +43,21 @@ function CheckoutContent() {
 
   const selectedPlan = plan ? planDetails[plan] : null
 
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setEmailError('')
 
-    // Validate email
+    if (!name || name.trim().length === 0) {
+      setEmailError('Please enter your name')
+      return
+    }
+
+    if (!businessName || businessName.trim().length === 0) {
+      setEmailError('Please enter your business name')
+      return
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!email || !emailRegex.test(email)) {
       setEmailError('Please enter a valid email address')
@@ -47,14 +65,14 @@ function CheckoutContent() {
     }
 
     if (!selectedPlan) {
-      setError('Invalid plan selected')
+      setEmailError('Invalid plan selected')
       return
     }
 
+    setEmailSubmitted(true)
     setLoading(true)
 
     try {
-      // Create Subscription with PaymentIntent
       const response = await fetch('/api/create-subscription', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -62,6 +80,8 @@ function CheckoutContent() {
           priceId: selectedPlan.priceId,
           planName: plan,
           email: email,
+          name: name,
+          businessName: businessName,
         }),
       })
 
@@ -72,10 +92,10 @@ function CheckoutContent() {
       }
 
       setClientSecret(data.clientSecret)
-      setEmailSubmitted(true)
+      setCurrentStep('payment')
       setLoading(false)
     } catch (err: any) {
-      setError(err.message || 'Failed to initialize checkout')
+      setEmailError(err.message || 'Failed to initialize checkout')
       setLoading(false)
     }
   }
@@ -117,6 +137,22 @@ function CheckoutContent() {
     appearance,
   }
 
+  const getStepNumber = () => {
+    switch (currentStep) {
+      case 'email': return 1
+      case 'payment': return 2
+      default: return 1
+    }
+  }
+
+  const getStepText = () => {
+    switch (currentStep) {
+      case 'email': return 'Enter your contact information'
+      case 'payment': return 'Complete payment'
+      default: return 'Enter your contact information'
+    }
+  }
+
   return (
     <>
       <Header />
@@ -127,7 +163,7 @@ function CheckoutContent() {
             <div className={styles.orderSummary}>
               <h2 className={styles.summaryTitle}>Order Summary</h2>
               <div className={styles.planInfo}>
-                <div className={styles.planName}>{selectedPlan.name}</div>
+                <div className={styles.planName}>{selectedPlan.displayName}</div>
                 <div className={styles.planPrice}>
                   ${selectedPlan.price}
                   <span className={styles.planPeriod}>/month</span>
@@ -149,8 +185,8 @@ function CheckoutContent() {
               </div>
               <div className={styles.benefits}>
                 <h3>What's included:</h3>
-                <ul>
-                  {selectedPlan.name === 'Starter' ? (
+                <ul className={plan === 'pro' ? styles.proBenefits : ''}>
+                  {plan === 'lite' ? (
                     <>
                       <li>✓ Single Page Website</li>
                       <li>✓ Logo Design</li>
@@ -159,15 +195,30 @@ function CheckoutContent() {
                     </>
                   ) : (
                     <>
-                      <li>✓ Unlimited Pages (5+ included)</li>
-                      <li>✓ Complete Branding Package</li>
-                      <li>✓ Local SEO Optimization</li>
-                      <li>✓ Review Management</li>
-                      <li>✓ Monthly Strategy Session</li>
-                      <li>🎁 100 Free Business Cards</li>
+                      <li>✓ Everything in Lite, plus:</li>
+                      <li>✓ Unlimited Pages (5+ pages included)</li>
+                      <li>✓ Logo, Brand Colors & Brand Assets</li>
+                      <li>✓ Organic SEO Optimization</li>
+                      <li>✓ Local Search Optimization</li>
+                      <li>✓ Social Media Templates & Ad Templates</li>
+                      <li>✓ Brand Images</li>
+                      <li>✓ Monthly 30min Marketing Strategy Session</li>
+                      <li>🎁 100 Free Business Cards on Signup</li>
                     </>
                   )}
                 </ul>
+              </div>
+
+              {/* Progress Indicator in Sidebar */}
+              <div className={styles.progressSteps}>
+                <div className={`${styles.progressStep} ${emailSubmitted || currentStep === 'payment' ? styles.progressStepComplete : currentStep === 'email' ? styles.progressStepActive : ''}`}>
+                  <div className={styles.progressStepNumber}>1</div>
+                  <div className={styles.progressStepLabel}>Contact</div>
+                </div>
+                <div className={`${styles.progressStep} ${currentStep === 'payment' ? styles.progressStepActive : ''}`}>
+                  <div className={styles.progressStepNumber}>2</div>
+                  <div className={styles.progressStepLabel}>Payment</div>
+                </div>
               </div>
             </div>
 
@@ -175,17 +226,50 @@ function CheckoutContent() {
             <div className={styles.checkoutForm}>
               <h1 className={styles.title}>Complete Your Subscription</h1>
               <p className={styles.subtitle}>
-                Subscribe to {selectedPlan.name} - billed monthly, cancel anytime
+                Subscribe to {selectedPlan.displayName} - billed monthly, cancel anytime
               </p>
 
-              {!emailSubmitted ? (
-                // Email capture form
+              {currentStep === 'email' && (
                 <div className={styles.emailCaptureSection}>
                   <div className={styles.stepIndicator}>
-                    <span className={styles.stepNumber}>1</span>
-                    <span className={styles.stepText}>Enter your email to continue</span>
+                    <span className={styles.stepNumber}>{getStepNumber()}</span>
+                    <span className={styles.stepText}>{getStepText()}</span>
                   </div>
                   <form onSubmit={handleEmailSubmit} className={styles.emailForm}>
+                    <div className={styles.formGroup}>
+                      <label htmlFor="name" className={styles.emailLabel}>
+                        Full Name <span className={styles.required}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className={styles.emailInput}
+                        placeholder="John Smith"
+                        required
+                        disabled={loading}
+                      />
+                    </div>
+
+                    <div className={styles.formGroup}>
+                      <label htmlFor="businessName" className={styles.emailLabel}>
+                        Business Name <span className={styles.required}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="businessName"
+                        name="businessName"
+                        value={businessName}
+                        onChange={(e) => setBusinessName(e.target.value)}
+                        className={styles.emailInput}
+                        placeholder="Your Business LLC"
+                        required
+                        disabled={loading}
+                      />
+                    </div>
+
                     <div className={styles.formGroup}>
                       <label htmlFor="email" className={styles.emailLabel}>
                         Email Address <span className={styles.required}>*</span>
@@ -211,7 +295,7 @@ function CheckoutContent() {
                     <button
                       type="submit"
                       className={styles.continueButton}
-                      disabled={loading || !email}
+                      disabled={loading || !email || !name || !businessName}
                     >
                       {loading ? (
                         <>
@@ -224,20 +308,35 @@ function CheckoutContent() {
                     </button>
                   </form>
                 </div>
-              ) : (
-                // Payment form (shown after email is submitted)
+              )}
+
+              {currentStep === 'payment' && (
                 <>
                   <div className={styles.stepIndicator}>
-                    <span className={styles.stepNumber}>2</span>
-                    <span className={styles.stepText}>Complete payment</span>
+                    <span className={styles.stepNumber}>{getStepNumber()}</span>
+                    <span className={styles.stepText}>{getStepText()}</span>
                   </div>
                   <div className={styles.emailConfirmation}>
-                    <span className={styles.emailLabel}>Email:</span>
-                    <span className={styles.emailValue}>{email}</span>
+                    <div>
+                      <span className={styles.emailLabel}>Name:</span>
+                      <span className={styles.emailValue}>{name}</span>
+                    </div>
+                    <div>
+                      <span className={styles.emailLabel}>Business:</span>
+                      <span className={styles.emailValue}>{businessName}</span>
+                    </div>
+                    <div>
+                      <span className={styles.emailLabel}>Email:</span>
+                      <span className={styles.emailValue}>{email}</span>
+                    </div>
                     <button
                       onClick={() => {
+                        setCurrentStep('email')
                         setEmailSubmitted(false)
                         setClientSecret('')
+                        setName('')
+                        setBusinessName('')
+                        setEmail('')
                       }}
                       className={styles.changeEmailButton}
                     >
@@ -263,7 +362,13 @@ function CheckoutContent() {
 
                   {clientSecret && (
                     <Elements options={options} stripe={stripePromise}>
-                      <CheckoutForm planName={selectedPlan.name} />
+                      <CheckoutForm
+                        planName={selectedPlan.name}
+                        plan={plan || 'pro'}
+                        email={email}
+                        name={name}
+                        businessName={businessName}
+                      />
                     </Elements>
                   )}
                 </>

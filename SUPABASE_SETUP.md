@@ -78,7 +78,7 @@ npm run dev
 ### 1. **users** table
 - Email address
 - Stripe customer ID
-- Current plan (Starter or Pro+)
+- Current plan (Lite or Pro+)
 - Creation and update timestamps
 
 ### 2. **subscriptions** table

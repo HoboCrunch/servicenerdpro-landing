@@ -140,16 +140,46 @@ export default function WebsiteDesign() {
           </div>
         </section>
 
+        {/* Did You Know Section */}
+        <section className={styles.didYouKnowSection}>
+          <div className={styles.container}>
+            <h2 className={styles.sectionTitle}>Did you know?</h2>
+            <div className={styles.statsGrid}>
+              <div className={styles.statCard}>
+                <svg className={styles.statCheckmark} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" fill="#f97316"/>
+                  <path d="M8 12.5L10.5 15L16 9.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <p className={styles.statText}>68% of local searches result in a phone call or store visit</p>
+              </div>
+              <div className={styles.statCard}>
+                <svg className={styles.statCheckmark} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" fill="#f97316"/>
+                  <path d="M8 12.5L10.5 15L16 9.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <p className={styles.statText}>Most customers decide to trust you within the first 5 seconds</p>
+              </div>
+              <div className={styles.statCard}>
+                <svg className={styles.statCheckmark} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" fill="#f97316"/>
+                  <path d="M8 12.5L10.5 15L16 9.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <p className={styles.statText}>75% of users never scroll past the first page of search results</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Process Section */}
         <section className={styles.processSection}>
           <div className={styles.container}>
             <h2 className={styles.sectionTitle}>You Stay in Your Lane, We Handle Ours</h2>
-            <p className={styles.processSubtitle}>Zero tech knowledge required. Zero marketing skills needed. Just run your business.</p>
+            <p className={styles.processSubtitle}>Three simple steps to your professional online presence</p>
             <div className={styles.processSteps}>
               <div className={styles.processStep}>
                 <div className={styles.stepNumber}>1</div>
                 <div className={styles.stepIcon}>📝</div>
-                <h3>Fill Out One Simple Form</h3>
+                <h3>Subscribe & Fill Out Information</h3>
                 <ul className={styles.checkList}>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,7 +191,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    Takes 10 minutes—all the info we need
+                    Choose your plan and subscribe
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,7 +203,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    You don't learn web design
+                    Complete our simple onboarding form
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,15 +215,15 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    You don't become a marketer
+                    Tell us about your business and needs
                   </li>
                 </ul>
               </div>
               <div className={styles.processArrow}>→</div>
               <div className={styles.processStep}>
                 <div className={styles.stepNumber}>2</div>
-                <div className={styles.stepIcon}>🚀</div>
-                <h3>We Build Everything for You</h3>
+                <div className={styles.stepIcon}>💬</div>
+                <h3>Have Onboarding Call</h3>
                 <ul className={styles.checkList}>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -205,7 +235,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    Professional design (custom, not templated)
+                    Quick call to understand your vision
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -217,7 +247,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    SEO setup so locals can find you
+                    Clarify website goals and features
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -229,15 +259,15 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    All the tech stuff you'd never figure out
+                    Set timeline and expectations
                   </li>
                 </ul>
               </div>
               <div className={styles.processArrow}>→</div>
               <div className={styles.processStep}>
                 <div className={styles.stepNumber}>3</div>
-                <div className={styles.stepIcon}>✨</div>
-                <h3>You Go Back to Running Jobs</h3>
+                <div className={styles.stepIcon}>🚀</div>
+                <h3>Get Your Website & Collaborate</h3>
                 <ul className={styles.checkList}>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +279,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    We host, maintain, and keep it online
+                    Receive your professional website
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -261,7 +291,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    24/7 support when you need help
+                    Provide feedback and request changes
                   </li>
                   <li className={styles.proHighlightItem}>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -273,7 +303,7 @@ export default function WebsiteDesign() {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <span className={styles.proHighlight}>Pro+ members: Monthly strategy calls</span>
+                    <span className={styles.proHighlight}>Pro+: Ongoing support & strategy sessions</span>
                   </li>
                 </ul>
               </div>
@@ -320,8 +350,8 @@ export default function WebsiteDesign() {
 
             <div className={styles.stats}>
               <div className={styles.stat}>
-                <div className={styles.statNumber}>500+</div>
-                <div className={styles.statLabel}>Service Businesses Launched</div>
+                <div className={styles.statNumber}>100+</div>
+                <div className={styles.statLabel}>Online Foundations Launched</div>
               </div>
               <div className={styles.stat}>
                 <div className={styles.statNumber}>7 Days</div>
@@ -345,7 +375,7 @@ export default function WebsiteDesign() {
             <Link href="/pricing">
               <button className={styles.primaryButton}>Get Your Professional Presence in 7 Days</button>
             </Link>
-            <p className={styles.guarantee}>✓ 7-Day Delivery Guarantee  ✓ Money-Back if Not Satisfied</p>
+            <p className={styles.guarantee}>✓ 7-Day Delivery Guarantee  ✓ 30-Day Money-Back Guarantee</p>
           </div>
         </section>
       </main>

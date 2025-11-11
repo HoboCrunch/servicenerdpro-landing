@@ -1,16 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
+import { supabaseAdmin } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
-    const { priceId, planName, email } = await request.json()
-
-    console.log('=== CREATE SUBSCRIPTION REQUEST ===')
-    console.log('Received priceId:', priceId)
-    console.log('Received planName:', planName)
-    console.log('Received email:', email)
-    console.log('ENV PRO PRICE:', process.env.NEXT_PUBLIC_STRIPE_PRO_PRICE_ID)
-    console.log('ENV STARTER PRICE:', process.env.NEXT_PUBLIC_STRIPE_STARTER_PRICE_ID)
+    const { priceId, planName, email, name, businessName } = await request.json()
 
     if (!priceId) {
       return NextResponse.json(
@@ -30,9 +24,7 @@ export async function POST(request: NextRequest) {
     let price
     try {
       price = await stripe.prices.retrieve(priceId)
-      console.log('Price retrieved:', price.id, 'Live mode:', price.livemode, 'Amount:', price.unit_amount)
     } catch (err: any) {
-      console.error('Failed to retrieve price:', err.message)
       return NextResponse.json(
         { error: `Invalid price ID: ${err.message}` },
         { status: 400 }
@@ -51,12 +43,57 @@ export async function POST(request: NextRequest) {
     // Create a customer with email
     const customer = await stripe.customers.create({
       email: email,
+      name: name || undefined,
       metadata: {
         planName,
+        businessName: businessName || '',
       },
     })
 
-    console.log('Customer created:', customer.id, 'Email:', customer.email)
+    // Create or update user in Supabase
+    const { data: existingUser, error: userSelectError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .single()
+
+    let userId: string
+
+    if (existingUser) {
+      // Update existing user
+      const { data: updatedUser, error: updateError } = await supabaseAdmin
+        .from('users')
+        .update({
+          stripe_customer_id: customer.id,
+          plan: planName,
+        })
+        .eq('id', existingUser.id)
+        .select()
+        .single()
+
+      if (updateError) {
+        throw new Error('Failed to update user record')
+      }
+
+      userId = existingUser.id
+    } else {
+      // Create new user
+      const { data: newUser, error: insertError } = await supabaseAdmin
+        .from('users')
+        .insert({
+          email,
+          stripe_customer_id: customer.id,
+          plan: planName,
+        })
+        .select()
+        .single()
+
+      if (insertError) {
+        throw new Error('Failed to create user record')
+      }
+
+      userId = newUser.id
+    }
 
     // Create the subscription with payment_behavior: default_incomplete
     // This creates a subscription with status: incomplete and generates a payment intent
@@ -76,46 +113,53 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    console.log('Subscription created:', subscription.id)
-    console.log('Subscription status:', subscription.status)
+    // Create subscription record in Supabase
+    const { error: subscriptionError } = await supabaseAdmin
+      .from('subscriptions')
+      .insert({
+        user_id: userId,
+        stripe_subscription_id: subscription.id,
+        stripe_price_id: priceId,
+        status: subscription.status,
+        plan: planName,
+        current_period_start: (subscription as any).current_period_start
+          ? new Date((subscription as any).current_period_start * 1000).toISOString()
+          : null,
+        current_period_end: (subscription as any).current_period_end
+          ? new Date((subscription as any).current_period_end * 1000).toISOString()
+          : null,
+        cancel_at_period_end: (subscription as any).cancel_at_period_end,
+      })
+
+    if (subscriptionError) {
+      // Don't throw - Stripe subscription already created, so continue
+    }
 
     // Extract the payment intent from the subscription's latest invoice
     const invoice = subscription.latest_invoice as any
-    console.log('Invoice ID:', invoice?.id)
-    console.log('Invoice status:', invoice?.status)
-    console.log('Invoice auto_advance:', invoice?.auto_advance)
 
     let paymentIntent = invoice?.payment_intent
-
-    console.log('Payment Intent from invoice:', paymentIntent?.id)
 
     // If payment intent doesn't exist on the invoice, it might be a pending setup intent
     // or the invoice might need to be finalized
     if (!paymentIntent && invoice?.id) {
-      console.log('No payment intent found, attempting to retrieve invoice with payment_intent expanded...')
-
       // Retrieve the invoice again with payment_intent expanded
       const retrievedInvoice = await stripe.invoices.retrieve(invoice.id, {
         expand: ['payment_intent'],
       })
 
-      console.log('Retrieved invoice status:', retrievedInvoice.status)
       paymentIntent = (retrievedInvoice as any).payment_intent
 
       // If still no payment intent, try finalizing the invoice
       if (!paymentIntent && retrievedInvoice.status === 'draft') {
-        console.log('Invoice is in draft status, finalizing...')
         const finalizedInvoice = await stripe.invoices.finalizeInvoice(invoice.id, {
           expand: ['payment_intent'],
         })
         paymentIntent = (finalizedInvoice as any).payment_intent
-        console.log('Finalized invoice payment intent:', paymentIntent?.id)
       }
 
       // If invoice is 'open' and still no payment intent, manually create one
       if (!paymentIntent && retrievedInvoice.status === 'open' && retrievedInvoice.amount_due > 0) {
-        console.log('Invoice is open but has no payment intent. Manually creating payment intent for invoice...')
-
         try {
           // Create a payment intent for the invoice amount
           const manualPaymentIntent = await stripe.paymentIntents.create({
@@ -132,20 +176,14 @@ export async function POST(request: NextRequest) {
             },
           })
 
-          console.log('Manual payment intent created:', manualPaymentIntent.id)
           paymentIntent = manualPaymentIntent
         } catch (piError: any) {
-          console.error('Failed to create manual payment intent:', piError.message)
+          // Failed to create manual payment intent
         }
       }
     }
 
-    console.log('Final Payment Intent ID:', paymentIntent?.id)
-    console.log('Client Secret:', paymentIntent?.client_secret ? 'exists' : 'missing')
-
     if (!paymentIntent?.client_secret) {
-      console.error('Full subscription object:', JSON.stringify(subscription, null, 2))
-      console.error('Latest invoice:', JSON.stringify(invoice, null, 2))
       throw new Error('Failed to create payment intent - invoice may not require immediate payment')
     }
 
@@ -153,9 +191,9 @@ export async function POST(request: NextRequest) {
       subscriptionId: subscription.id,
       clientSecret: paymentIntent.client_secret,
       customerId: customer.id,
+      userId: userId,
     })
   } catch (error: any) {
-    console.error('Subscription creation error:', error)
     return NextResponse.json(
       { error: error.message || 'Failed to create subscription' },
       { status: 500 }

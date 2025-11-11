@@ -2,7 +2,7 @@
 
 ## Overview
 
-ServiceNerd Pro uses Stripe for processing recurring monthly subscriptions. Customers can subscribe to Starter ($99/mo) or Pro+ ($199/mo) plans through an embedded checkout experience that stays on your domain.
+Service Pro uses Stripe for processing recurring monthly subscriptions. Customers can subscribe to Lite ($99/mo) or Pro+ ($199/mo) plans through an embedded checkout experience that stays on your domain.
 
 ---
 
@@ -123,14 +123,14 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
 Create two products in [Stripe Dashboard → Products](https://dashboard.stripe.com/products):
 
-**Starter Plan:**
-- Name: `ServiceNerd Pro - Starter`
+**Lite Plan:**
+- Name: `Service Pro - Lite`
 - Price: `$99.00 USD`
 - Billing: `Monthly`
 - Copy the **Price ID** (`price_...`)
 
 **Pro+ Plan:**
-- Name: `ServiceNerd Pro - Pro+`
+- Name: `Service Pro+`
 - Price: `$199.00 USD`
 - Billing: `Monthly`
 - Copy the **Price ID** (`price_...`)

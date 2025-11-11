@@ -42,7 +42,17 @@ export default function PricingCard({
       {featured && <div className={styles.popularBadge}>Most Popular</div>}
 
       <div className={styles.planHeader}>
-        <h3 className={styles.planName}>{planName}</h3>
+        <h3 className={styles.planName}>
+          <span style={{ whiteSpace: 'nowrap' }}>
+            {planName === 'Pro+' ? (
+              <>Service <span style={{ color: '#f97316' }}>Pro<sup>+</sup></span></>
+            ) : planName === 'Lite' ? (
+              <>Service <span style={{ color: '#3b82f6' }}>Pro Lite</span></>
+            ) : (
+              planName
+            )}
+          </span>
+        </h3>
         <div className={styles.planPrice}>
           <span className={styles.currency}>$</span>
           <span className={styles.amount}>{price}</span>
@@ -55,7 +65,13 @@ export default function PricingCard({
         {features.map((feature, index) => (
           <div
             key={index}
-            className={feature.included ? styles.feature : styles.featureDisabled}
+            className={
+              feature.included
+                ? featured
+                  ? styles.featureFeatured
+                  : styles.feature
+                : styles.featureDisabled
+            }
           >
             {feature.text}
           </div>

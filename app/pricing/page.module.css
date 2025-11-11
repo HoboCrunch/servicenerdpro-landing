@@ -177,6 +177,19 @@
   border-bottom: 1px solid #f1f5f9;
 }
 
+.featureFeatured {
+  padding: 0.5rem 0;
+  color: #334155;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.featureFeatured::first-letter {
+  color: #f97316;
+  font-weight: 700;
+}
+
 .featureDisabled {
   padding: 0.5rem 0;
   color: #94a3b8;
@@ -322,7 +335,12 @@
 /* CTA Section */
 .cta {
   padding: 6rem 0;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  background:
+    linear-gradient(135deg, rgba(30, 58, 138, 0.5) 0%, rgba(30, 64, 175, 0.5) 100%),
+    url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/blueprint-blank.webp');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
   color: white;
   text-align: center;
 }

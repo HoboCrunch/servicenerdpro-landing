@@ -116,7 +116,7 @@ All conversion events are now tracked in Google Analytics 4 (GA4). This guide ex
 
 **How to View:**
 1. GA4 → Events → `begin_checkout`
-2. Add dimension: `event_label` to see which tier (Starter, Pro+, Enterprise)
+2. Add dimension: `event_label` to see which tier (Lite, Pro+, Enterprise)
 
 **Key Metrics:**
 - **Pricing page visit rate** = `pricing_page_view` / total_visitors

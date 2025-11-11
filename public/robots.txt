@@ -1,0 +1,12 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow API routes and sensitive paths
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /onboarding/
+Disallow: /success/
+
+# Sitemap location
+Sitemap: https://servicenerdpro.com/sitemap.xml

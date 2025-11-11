@@ -31,7 +31,7 @@ Each visitor sees one variant consistently, and we track which one converts best
 **Conversion Events:**
 - CTA clicks (hero, final section, mobile sticky bar)
 - Pricing page visits
-- Checkout initiations (by tier: Starter, Pro+, Enterprise)
+- Checkout initiations (by tier: Lite, Pro+, Enterprise)
 - Exit intent popup (shown, submitted, dismissed)
 - Testimonial page views
 

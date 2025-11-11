@@ -1,134 +1,26 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import Header from '../components/Header'
 import styles from './page.module.css'
 
 function SuccessContent() {
   const searchParams = useSearchParams()
-  const router = useRouter()
-  const sessionId = searchParams.get('session_id')
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const paymentIntent = searchParams.get('payment_intent')
+  const plan = searchParams.get('plan')
+  const email = searchParams.get('email')
+  const name = searchParams.get('name')
+  const businessName = searchParams.get('businessName')
 
-  useEffect(() => {
-    const redirectToOnboarding = async () => {
-      if (!sessionId) {
-        // No session ID - show plan selection instead of error
-        setLoading(false)
-        return
-      }
-
-      try {
-        // Fetch session details from Stripe to determine plan
-        const response = await fetch(`/api/get-session?session_id=${sessionId}`)
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch session details')
-        }
-
-        const data = await response.json()
-        const planName = data.metadata?.planName || ''
-
-        // Route to appropriate onboarding page based on plan
-        if (planName.toLowerCase().includes('starter')) {
-          router.push(`/onboarding/starter?session_id=${sessionId}`)
-        } else if (planName.toLowerCase().includes('pro')) {
-          router.push(`/onboarding/pro?session_id=${sessionId}`)
-        } else {
-          // Default fallback - could be enterprise or unknown
-          setError('Unable to determine subscription plan')
-          setLoading(false)
-        }
-      } catch (err) {
-        console.error('Error redirecting to onboarding:', err)
-        setError(err instanceof Error ? err.message : 'An error occurred')
-        setLoading(false)
-      }
-    }
-
-    redirectToOnboarding()
-  }, [sessionId, router])
-
-  // Show plan selection if no session ID (for testing/manual access)
-  if (!loading && !sessionId) {
-    return (
-      <>
-        <Header />
-        <main className={styles.main}>
-          <div className={styles.container}>
-            <div className={styles.successCard}>
-              <div className={styles.checkmark}>✓</div>
-              <h1 className={styles.title}>Welcome to ServiceNerd Pro!</h1>
-              <p className={styles.message}>
-                Please select your plan to continue with onboarding:
-              </p>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-                <button
-                  onClick={() => router.push('/onboarding/starter')}
-                  className={styles.homeButton}
-                  style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)' }}
-                >
-                  Starter Plan Onboarding
-                </button>
-                <button
-                  onClick={() => router.push('/onboarding/pro')}
-                  className={styles.homeButton}
-                  style={{ background: 'linear-gradient(135deg, #f97316 0%, #fb923c 100%)' }}
-                >
-                  Pro+ Plan Onboarding
-                </button>
-              </div>
-              <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', color: '#64748b' }}>
-                If you just completed payment, please check your email for the onboarding link.
-              </p>
-            </div>
-          </div>
-        </main>
-      </>
-    )
-  }
-
-  if (error) {
-    return (
-      <>
-        <Header />
-        <main className={styles.main}>
-          <div className={styles.container}>
-            <div className={styles.successCard}>
-              <div className={styles.checkmark}>✓</div>
-              <h1 className={styles.title}>Payment Successful!</h1>
-              <p className={styles.message}>
-                Thank you for subscribing! Your subscription is now active.
-              </p>
-              <p className={styles.details}>
-                You'll receive a confirmation email shortly with next steps.
-              </p>
-              <p className={styles.error}>
-                {error}
-              </p>
-              <div style={{ marginTop: '2rem' }}>
-                <button
-                  onClick={() => router.push('/onboarding/starter')}
-                  className={styles.homeButton}
-                  style={{ marginRight: '1rem' }}
-                >
-                  Starter Onboarding
-                </button>
-                <button
-                  onClick={() => router.push('/onboarding/pro')}
-                  className={styles.homeButton}
-                >
-                  Pro+ Onboarding
-                </button>
-              </div>
-            </div>
-          </div>
-        </main>
-      </>
-    )
-  }
+  // Construct onboarding form URL
+  const onboardingUrl = `/onboarding/${plan}?${new URLSearchParams({
+    email: email || '',
+    name: name || '',
+    businessName: businessName || '',
+    payment_intent: paymentIntent || '',
+  }).toString()}`
 
   return (
     <>
@@ -136,11 +28,85 @@ function SuccessContent() {
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.successCard}>
-            <div className={styles.spinner}></div>
+            <div className={styles.checkmark}>✓</div>
             <h1 className={styles.title}>Payment Successful!</h1>
             <p className={styles.message}>
-              Redirecting you to complete your setup...
+              Your subscription to <span style={{ whiteSpace: 'nowrap' }}>Service Pro{plan === 'pro' ? <sup style={{ color: '#f97316', fontWeight: '600' }}>+</sup> : <span style={{ color: '#3b82f6', fontWeight: '600' }}> Lite</span>}</span> has been successfully activated.
             </p>
+
+            <div style={{
+              backgroundColor: '#fff7ed',
+              border: '2px solid #f97316',
+              borderRadius: '12px',
+              padding: '24px',
+              margin: '24px 0',
+              textAlign: 'center'
+            }}>
+              <h2 style={{ color: '#1e293b', fontSize: '20px', margin: '0 0 12px 0', fontWeight: '700' }}>
+                What's Next?
+              </h2>
+              <p style={{ color: '#64748b', fontSize: '15px', margin: '0 0 20px 0', lineHeight: '1.6' }}>
+                All you need to do is complete the onboarding form and schedule your call. That's it!
+              </p>
+              <a
+                href={onboardingUrl}
+                style={{
+                  display: 'inline-block',
+                  backgroundColor: '#f97316',
+                  color: 'white',
+                  padding: '14px 32px',
+                  textDecoration: 'none',
+                  borderRadius: '8px',
+                  fontWeight: '600',
+                  fontSize: '16px',
+                  boxShadow: '0 4px 12px rgba(249, 115, 22, 0.3)',
+                  transition: 'transform 0.2s ease'
+                }}
+                onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                📋 Complete Onboarding Form
+              </a>
+            </div>
+
+            <div style={{
+              backgroundColor: '#f0f9ff',
+              border: '2px solid #3b82f6',
+              borderRadius: '12px',
+              padding: '20px',
+              margin: '24px 0',
+              textAlign: 'center'
+            }}>
+              <h2 style={{ color: '#1e293b', fontSize: '18px', margin: '0 0 8px 0', fontWeight: '600' }}>
+                📧 Check Your Email
+              </h2>
+              <p style={{ color: '#64748b', fontSize: '14px', margin: 0, lineHeight: '1.6' }}>
+                We've sent a welcome email to <strong>{email}</strong> with a link to the onboarding form. You can also complete it using the button above!
+              </p>
+            </div>
+
+            <p className={styles.details}>
+              <strong>Your Next Steps:</strong><br/>
+              1. Complete the onboarding form with your business details<br/>
+              2. Schedule your onboarding call to discuss your vision<br/>
+              3. We'll get to work building your website!
+            </p>
+
+            <p className={styles.deliveryNote}>
+              ⚡ Your website will be live within 7 days
+            </p>
+
+            <div style={{ marginTop: '24px', padding: '16px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
+              <p style={{ fontSize: '14px', color: '#64748b', margin: 0 }}>
+                <strong>Questions?</strong> Contact us:<br/>
+                📧 contact@servicenerdpro.com<br/>
+                📞 (509) 961-6310
+              </p>
+            </div>
+
+            <Link href="/" className={styles.homeLink} style={{ marginTop: '20px', display: 'inline-block' }}>
+              Return to Home →
+            </Link>
           </div>
         </div>
       </main>
@@ -156,9 +122,9 @@ export default function SuccessPage() {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0a1128 0%, #1a2642 100%)'
+        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'
       }}>
-        <div style={{ color: 'white', fontSize: '1.5rem' }}>Loading...</div>
+        <div style={{ color: '#334155', fontSize: '1.5rem' }}>Loading...</div>
       </div>
     }>
       <SuccessContent />

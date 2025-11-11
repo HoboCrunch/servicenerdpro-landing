@@ -112,6 +112,11 @@
   line-height: 1.5;
 }
 
+.proBenefits li::first-letter {
+  color: #f97316;
+  font-weight: 700;
+}
+
 /* Checkout Form */
 .checkoutForm {
   background: white;
@@ -453,6 +458,229 @@
   }
 }
 
+/* Progress Steps in Sidebar */
+.progressSteps {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.progressStep {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.progressStepComplete {
+  opacity: 1;
+}
+
+.progressStepActive {
+  opacity: 1;
+}
+
+.progressStepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.progressStepComplete .progressStepNumber {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+}
+
+.progressStepActive .progressStepNumber {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  color: white;
+}
+
+.progressStepLabel {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.progressStepComplete .progressStepLabel,
+.progressStepActive .progressStepLabel {
+  color: #334155;
+  font-weight: 600;
+}
+
+/* Calendly Section */
+.calendlySection {
+  margin-top: 2rem;
+}
+
+.calendlySimpleBox {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.calendlySimpleBox p {
+  color: #64748b;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.calendlyButton {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.calendlyButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+}
+
+.scheduledNotice {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skipButton {
+  width: 100%;
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #64748b;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.skipButton:hover {
+  background: #f8fafc;
+  border-color: #f97316;
+  color: #f97316;
+}
+
+/* Form Section */
+.formSection {
+  margin-top: 2rem;
+}
+
+.onboardingForm {
+  margin-top: 1.5rem;
+}
+
+.formSectionBlock {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.formSectionBlock:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.formSectionTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formSectionIcon {
+  font-size: 1.5rem;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.formGridTwo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.select {
+  cursor: pointer;
+  background: white;
+}
+
 @media (max-width: 768px) {
   .container {
     padding: 2rem 1rem;
@@ -470,4 +698,239 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  .formGridTwo {
+    grid-template-columns: 1fr;
+  }
+
+  .progressSteps {
+    display: none;
+  }
+
+  .successTitle {
+    font-size: 1.5rem;
+  }
+
+  .checkmark {
+    width: 56px;
+    height: 56px;
+    font-size: 2rem;
+  }
+
+  .nextStepsCard {
+    padding: 1.25rem;
+  }
+
+  .infoBox {
+    padding: 0.875rem;
+  }
+
+  .infoIcon {
+    font-size: 1.25rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .stepsList {
+    padding: 1rem;
+  }
+}
+
+/* Success Section (Step 3) */
+.successSection {
+  margin-top: 2rem;
+}
+
+.successContent {
+  text-align: center;
+}
+
+.checkmark {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+  margin: 0 auto 1rem;
+  animation: checkmarkPop 0.5s ease;
+}
+
+@keyframes checkmarkPop {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.successTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin: 0 0 0.5rem 0;
+}
+
+.successMessage {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.nextStepsCard {
+  background-color: #fff7ed;
+  border: 2px solid #f97316;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.nextStepsTitle {
+  color: #1e293b;
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.nextStepsText {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.onboardingButton {
+  display: inline-block;
+  background-color: #f97316;
+  color: white;
+  padding: 0.875rem 1.75rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+  transition: all 0.2s ease;
+}
+
+.onboardingButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.4);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.infoBox {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.infoBox:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.infoIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoContent {
+  flex: 1;
+}
+
+.infoContent h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 0.25rem 0;
+}
+
+.infoContent p {
+  font-size: 0.875rem;
+  color: #64748b;
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.infoContent p:last-child {
+  margin-bottom: 0;
+}
+
+.infoContent .onboardingButton {
+  display: inline-block;
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  transition: all 0.2s ease;
+  margin-top: 0.75rem;
+  width: 100%;
+  text-align: center;
+}
+
+.infoContent .onboardingButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  background-color: #2563eb;
+}
+
+.stepsList {
+  text-align: left;
+  margin: 1.5rem 0 0 0;
+  padding: 1.25rem;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.stepsList h4 {
+  font-size: 0.95rem;
+  color: #334155;
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+}
+
+.stepsList ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 0.875rem;
+}
+
+.stepsList li {
+  margin-bottom: 0.5rem;
+}
+
+.stepsList li:last-child {
+  margin-bottom: 0;
 }

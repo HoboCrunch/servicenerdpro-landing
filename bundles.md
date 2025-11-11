@@ -1,4 +1,4 @@
-# Starter ('lite')
+# Lite
 - Single Page Website
 - Logo Design
 - 0 Downtime hosting
@@ -13,8 +13,7 @@
 ## Online Marketing
 - Organic search engine optimization
 - Localization (optimizing website structure for local discoverability)
-- Review maangement (mitigate negative reviews & incentivize positive reviews)
-- Marketing planning (1 free 30 minute session with our marketing experts every month)
+- Marketing consulting (1 free 30 minute session with our marketing experts every month)
 ## Branding
 - Logo design
 - Brand identity design

@@ -13,7 +13,7 @@
 .hero {
   position: relative;
   background: linear-gradient(135deg, rgba(30, 64, 175, 0.7) 0%, rgba(30, 58, 138, 0.7) 100%),
-              url('/webdev-header.webp');
+              url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/webdev-header.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -422,6 +422,65 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Did You Know Section */
+.didYouKnowSection {
+  padding: 5rem 0;
+  background: white;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.statCard {
+  background: #f8fafc;
+  padding: 2rem 1.75rem;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.statCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(30, 64, 175, 0.12);
+  border-color: #3b82f6;
+  background: white;
+}
+
+.statCheckmark {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 8px rgba(249, 115, 22, 0.3));
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .statCheckmark {
+  transform: scale(1.1);
+  filter: drop-shadow(0 6px 12px rgba(249, 115, 22, 0.4));
+}
+
+.statText {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #475569;
+  margin: 0;
+  font-weight: 500;
+}
+
+.statCard:hover .statText {
+  color: #1e3a8a;
+}
+
 /* Process Section */
 .processSection {
   padding: 5rem 0;
@@ -618,7 +677,12 @@
 /* CTA Section */
 .cta {
   padding: 6rem 0;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  background:
+    linear-gradient(135deg, rgba(30, 58, 138, 0.5) 0%, rgba(30, 64, 175, 0.5) 100%),
+    url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/blueprint-blank.webp');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
   color: white;
   text-align: center;
 }
@@ -730,5 +794,23 @@
   .ctaBannerButton {
     font-size: 1rem;
     padding: 0.875rem 2.5rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .statCard {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .statCheckmark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .statText {
+    font-size: 0.9375rem;
   }
 }

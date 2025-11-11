@@ -1,6 +1,6 @@
 # Stripe Integration Setup Guide
 
-This guide will walk you through setting up Stripe payments for ServiceNerd Pro.
+This guide will walk you through setting up Stripe payments for Service Pro.
 
 ## 1. Create a Stripe Account
 
@@ -23,8 +23,8 @@ This guide will walk you through setting up Stripe payments for ServiceNerd Pro.
 
 **Create three products:**
 
-#### Product 1: Starter
-- Name: `ServiceNerd Pro - Starter`
+#### Product 1: Lite
+- Name: `Service Pro - Lite`
 - Description: `Perfect for solo service pros just getting started`
 - Pricing:
   - Price: `$99.00 USD`
@@ -32,8 +32,8 @@ This guide will walk you through setting up Stripe payments for ServiceNerd Pro.
   - Click **"Save product"**
 - **Copy the Price ID** (starts with `price_`)
 
-#### Product 2: Pro
-- Name: `ServiceNerd Pro - Pro`
+#### Product 2: Pro+
+- Name: `Service Pro+`
 - Description: `Everything you need to dominate your local market`
 - Pricing:
   - Price: `$199.00 USD`
@@ -42,7 +42,7 @@ This guide will walk you through setting up Stripe payments for ServiceNerd Pro.
 - **Copy the Price ID** (starts with `price_`)
 
 #### Product 3: Enterprise
-- Name: `ServiceNerd Pro - Enterprise`
+- Name: `Service Pro - Enterprise`
 - Description: `For established businesses ready to scale`
 - Pricing:
   - Price: `$399.00 USD`
@@ -61,13 +61,13 @@ This guide will walk you through setting up Stripe payments for ServiceNerd Pro.
 stripe login
 
 # Create products and prices
-stripe products create --name="ServiceNerd Pro - Starter" --description="Perfect for solo service pros"
+stripe products create --name="Service Pro - Lite" --description="Perfect for solo service pros"
 stripe prices create --product=prod_xxx --unit-amount=9900 --currency=usd --recurring-interval=month
 
-stripe products create --name="ServiceNerd Pro - Pro" --description="Everything you need to dominate"
+stripe products create --name="Service Pro+" --description="Everything you need to dominate"
 stripe prices create --product=prod_xxx --unit-amount=19900 --currency=usd --recurring-interval=month
 
-stripe products create --name="ServiceNerd Pro - Enterprise" --description="For established businesses"
+stripe products create --name="Service Pro - Enterprise" --description="For established businesses"
 stripe prices create --product=prod_xxx --unit-amount=39900 --currency=usd --recurring-interval=month
 ```
 

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
+import { supabaseAdmin } from '@/lib/supabase'
 import { headers } from 'next/headers'
 import Stripe from 'stripe'
 
@@ -18,7 +19,6 @@ export async function POST(request: NextRequest) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
   if (!webhookSecret) {
-    console.error('STRIPE_WEBHOOK_SECRET is not set')
     return NextResponse.json(
       { error: 'Webhook secret not configured' },
       { status: 500 }
@@ -30,7 +30,6 @@ export async function POST(request: NextRequest) {
   try {
     event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
   } catch (err: any) {
-    console.error('Webhook signature verification failed:', err.message)
     return NextResponse.json(
       { error: `Webhook Error: ${err.message}` },
       { status: 400 }
@@ -43,14 +42,6 @@ export async function POST(request: NextRequest) {
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session
 
-        console.log('✅ Checkout completed:', {
-          sessionId: session.id,
-          customerId: session.customer,
-          customerEmail: session.customer_email,
-          subscriptionId: session.subscription,
-          plan: session.metadata?.plan,
-        })
-
         // TODO: Create user account in your database
         // TODO: Send welcome email
         // TODO: Trigger any post-signup workflows
@@ -61,14 +52,27 @@ export async function POST(request: NextRequest) {
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription
 
-        console.log('🔄 Subscription updated:', {
-          subscriptionId: subscription.id,
-          customerId: subscription.customer,
-          status: subscription.status,
-        })
+        // Update subscription in Supabase
+        const { error: updateError } = await supabaseAdmin
+          .from('subscriptions')
+          .update({
+            status: subscription.status,
+            current_period_start: (subscription as any).current_period_start
+              ? new Date((subscription as any).current_period_start * 1000).toISOString()
+              : null,
+            current_period_end: (subscription as any).current_period_end
+              ? new Date((subscription as any).current_period_end * 1000).toISOString()
+              : null,
+            cancel_at_period_end: (subscription as any).cancel_at_period_end,
+            canceled_at: (subscription as any).canceled_at
+              ? new Date((subscription as any).canceled_at * 1000).toISOString()
+              : null,
+          })
+          .eq('stripe_subscription_id', subscription.id)
 
-        // TODO: Update subscription status in your database
-        // TODO: Handle plan changes, cancellations, etc.
+        if (updateError) {
+          // Failed to update subscription
+        }
 
         break
       }
@@ -76,25 +80,24 @@ export async function POST(request: NextRequest) {
       case 'customer.subscription.deleted': {
         const subscription = event.data.object as Stripe.Subscription
 
-        console.log('❌ Subscription cancelled:', {
-          subscriptionId: subscription.id,
-          customerId: subscription.customer,
-        })
+        // Update subscription status to canceled in Supabase
+        const { error: deleteError } = await supabaseAdmin
+          .from('subscriptions')
+          .update({
+            status: 'canceled',
+            canceled_at: new Date().toISOString(),
+          })
+          .eq('stripe_subscription_id', subscription.id)
 
-        // TODO: Handle subscription cancellation
-        // TODO: Revoke access or downgrade features
+        if (deleteError) {
+          // Failed to update canceled subscription
+        }
 
         break
       }
 
       case 'invoice.payment_succeeded': {
         const invoice = event.data.object as Stripe.Invoice
-
-        console.log('💰 Payment succeeded:', {
-          invoiceId: invoice.id,
-          customerId: invoice.customer,
-          amount: invoice.amount_paid / 100,
-        })
 
         // TODO: Send receipt email
         // TODO: Update payment history
@@ -105,11 +108,6 @@ export async function POST(request: NextRequest) {
       case 'invoice.payment_failed': {
         const invoice = event.data.object as Stripe.Invoice
 
-        console.log('⚠️ Payment failed:', {
-          invoiceId: invoice.id,
-          customerId: invoice.customer,
-        })
-
         // TODO: Send payment failed email
         // TODO: Notify customer to update payment method
 
@@ -117,12 +115,12 @@ export async function POST(request: NextRequest) {
       }
 
       default:
-        console.log(`Unhandled event type: ${event.type}`)
+        // Unhandled event type
+        break
     }
 
     return NextResponse.json({ received: true })
   } catch (error: any) {
-    console.error('Error handling webhook:', error)
     return NextResponse.json(
       { error: 'Webhook handler failed' },
       { status: 500 }

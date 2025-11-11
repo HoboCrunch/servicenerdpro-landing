@@ -11,7 +11,11 @@
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.95) 0%, rgba(22, 163, 74, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.85) 0%, rgba(30, 58, 138, 0.85) 100%),
+              url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/digital-marketing.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   padding: 6rem 0;
   text-align: center;
@@ -122,7 +126,7 @@
 .problemCard {
   background: white;
   border: 2px solid #93c5fd;
-  border-top: 5px solid #22c55e;
+  border-top: 5px solid #3b82f6;
   border-radius: 16px;
   padding: 0;
   text-align: center;
@@ -164,7 +168,7 @@
 .problemCard:hover {
   transform: translateY(-8px);
   box-shadow: 0 16px 40px rgba(30, 64, 175, 0.15);
-  border-color: #22c55e;
+  border-color: #3b82f6;
 }
 
 .problemCard:hover::before {
@@ -261,6 +265,87 @@
   margin-top: 3rem;
 }
 
+.foundationGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.foundationCard {
+  background: white;
+  padding: 0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 2px solid #e2e8f0;
+  overflow: hidden;
+  position: relative;
+}
+
+.foundationCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+}
+
+.foundationBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  padding: 0.4rem 0.9rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  z-index: 2;
+}
+
+.foundationCard .featureHeader {
+  padding: 2rem 1.75rem 0.5rem;
+}
+
+.foundationCard .featureHeader h3 {
+  font-size: 1.375rem;
+}
+
+.foundationCard > p {
+  padding: 0 1.75rem 1.25rem;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.975rem;
+}
+
+.benefitList {
+  list-style: none;
+  padding: 0 1.75rem 1.75rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.benefitList li {
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.benefitList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
 .featureCard {
   background: #f8fafc;
   padding: 1.5rem;
@@ -271,8 +356,8 @@
 
 .featureCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(34, 197, 94, 0.15);
-  border-color: #22c55e;
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.15);
+  border-color: #3b82f6;
 }
 
 .featureHeader {
@@ -309,12 +394,12 @@
 }
 
 .ctaBannerContent {
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   text-align: center;
   color: white;
-  box-shadow: 0 8px 32px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.3);
   position: relative;
   overflow: hidden;
 }
@@ -380,9 +465,27 @@
 
 /* Results Section */
 .resultsSection {
-  padding: 5rem 0;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  padding: 5rem 0 7rem 0;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
+  position: relative;
+}
+
+.resultsSection::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #f8fafc);
+  pointer-events: none;
+}
+
+.resultsSection .sectionTitle {
+  color: white;
+  position: relative;
+  z-index: 1;
 }
 
 .resultsGrid {
@@ -393,12 +496,20 @@
 }
 
 .resultCard {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
   padding: 2.5rem 2rem;
   text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.resultCard:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
 }
 
 .resultMetric {
@@ -413,6 +524,83 @@
   font-size: 1.125rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.95);
+}
+
+/* Did You Know Banner */
+.didYouKnowBanner {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.didYouKnowBanner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.bannerContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bannerTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.bannerStats {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.bannerStat {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+  max-width: 350px;
+}
+
+.bannerCheckmark {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  margin-top: 2px;
+  filter: drop-shadow(0 2px 8px rgba(249, 115, 22, 0.4));
+}
+
+.bannerCheckmark circle {
+  fill: #f97316;
+}
+
+.bannerStat span {
+  font-size: 0.95rem;
+  color: #e0e7ff;
+  font-weight: 500;
+  line-height: 1.55;
+  text-align: left;
 }
 
 /* Process Section */
@@ -454,8 +642,8 @@
 
 .processStep:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(34, 197, 94, 0.1);
-  border-color: #22c55e;
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
+  border-color: #3b82f6;
 }
 
 .stepNumber {
@@ -465,7 +653,7 @@
   transform: translateX(-50%);
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -473,7 +661,7 @@
   justify-content: center;
   font-size: 1.5rem;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
   border: 3px solid white;
 }
 
@@ -513,11 +701,11 @@
   height: 20px;
   min-width: 20px;
   margin-top: 2px;
-  filter: drop-shadow(0 2px 4px rgba(34, 197, 94, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
 }
 
 .proHighlight {
-  color: #22c55e;
+  color: #3b82f6;
   font-weight: 600;
 }
 
@@ -527,7 +715,7 @@
 
 .processArrow {
   font-size: 2rem;
-  color: #22c55e;
+  color: #3b82f6;
   font-weight: 700;
   align-self: center;
 }
@@ -549,14 +737,14 @@
   background: #f8fafc;
   padding: 2rem;
   border-radius: 12px;
-  border-left: 4px solid #22c55e;
+  border-left: 4px solid #3b82f6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
 
 .testimonialCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(34, 197, 94, 0.1);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.1);
 }
 
 .testimonialQuote {
@@ -599,7 +787,7 @@
 .statNumber {
   font-size: 3rem;
   font-weight: 700;
-  color: #16a34a;
+  color: #2563eb;
   margin-bottom: 0.5rem;
 }
 
@@ -611,7 +799,12 @@
 /* CTA Section */
 .cta {
   padding: 6rem 0;
-  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  background:
+    linear-gradient(135deg, rgba(30, 58, 138, 0.5) 0%, rgba(30, 64, 175, 0.5) 100%),
+    url('https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/blueprint-blank.webp');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
   color: white;
   text-align: center;
 }
@@ -669,8 +862,21 @@
     font-size: 0.9375rem;
   }
 
-  .featureGrid {
+  .featureGrid,
+  .foundationGrid {
     grid-template-columns: 1fr;
+  }
+
+  .foundationCard .featureHeader {
+    padding: 1.5rem 1.5rem 0.5rem;
+  }
+
+  .foundationCard > p {
+    padding: 0 1.5rem 1rem;
+  }
+
+  .benefitList {
+    padding: 0 1.5rem 1.5rem;
   }
 
   .processArrow {
@@ -715,5 +921,36 @@
   .ctaBannerButton {
     font-size: 1rem;
     padding: 0.875rem 2.5rem;
+  }
+
+  .didYouKnowBanner {
+    padding: 2.5rem 0;
+  }
+
+  .bannerTitle {
+    font-size: 1.75rem;
+  }
+
+  .bannerStats {
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .bannerStat {
+    justify-content: flex-start;
+    max-width: 100%;
+    flex: none;
+  }
+
+  .bannerStat span {
+    font-size: 0.9375rem;
+  }
+
+  .bannerCheckmark {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
   }
 }

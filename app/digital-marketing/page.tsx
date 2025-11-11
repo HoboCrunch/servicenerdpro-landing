@@ -12,150 +12,105 @@ export default function DigitalMarketing() {
           <div className={styles.container}>
             <div className={styles.heroContent}>
               <h1 className={styles.heroTitle}>
-                Get Found by Customers<br />Searching for Your Services
+                Experience An Online<br />Foundation That Converts
               </h1>
               <p className={styles.heroSubtitle}>
-                Stop waiting for the phone to ring. Our digital marketing gets you to the top of Google,
-                drives real leads, and fills your calendar—all while you focus on doing the work you love.
+                Beautiful website. Professional brand. Found on Google. We create the complete online presence
+                that turns searches into customers—without the complexity of ad campaigns or confusing dashboards.
               </p>
               <div className={styles.ctaButtons}>
                 <Link href="/pricing">
-                  <button className={styles.primaryButton}>Get Started</button>
+                  <button className={styles.primaryButton}>Get Your Foundation</button>
                 </Link>
                 <Link href="/testimonials">
-                  <button className={styles.secondaryButton}>See Results</button>
+                  <button className={styles.secondaryButton}>See Examples</button>
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* The Problem Section */}
-        <section className={styles.problemSection}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>You're Invisible Online</h2>
-            <p className={styles.problemSubtitle}>Your competitors show up first on Google, while you're waiting for the phone to ring</p>
-            <div className={styles.problemGrid}>
-              <div className={styles.problemCard}>
-                <div className={styles.problemIcon}>
-                  <img src="/icon-target.svg" alt="Not on Google" />
-                </div>
-                <div className={styles.problemContent}>
-                  <h3>Not on Google</h3>
-                  <p>When locals search for your services, competitors show up. You don't. You're losing jobs daily.</p>
-                </div>
-              </div>
-              <div className={styles.problemCard}>
-                <div className={styles.problemIcon}>
-                  <img src="/icon-growth.svg" alt="Wasting Ad Spend" />
-                </div>
-                <div className={styles.problemContent}>
-                  <h3>Wasting Ad Spend</h3>
-                  <p>Facebook ads that don't convert. Google Ads that drain your budget with zero ROI.</p>
-                </div>
-              </div>
-              <div className={styles.problemCard}>
-                <div className={styles.problemIcon}>
-                  <img src="/icon-seo.svg" alt="Marketing Confusion" />
-                </div>
-                <div className={styles.problemContent}>
-                  <h3>Marketing Confusion</h3>
-                  <p>SEO, PPC, social media—it's overwhelming. You need someone to just handle it.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
+        {/* Foundation Components Section */}
         <section className={styles.features}>
           <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>What's Included</h2>
+            <h2 className={styles.sectionTitle}>The 3-Part Online Marketing Foundation</h2>
             <p className={styles.sectionSubtitle}>
-              Complete digital marketing that drives real results
+              Website + Brand + SEO = A complete online presence that works together to convert visitors into customers
             </p>
 
-            <div className={styles.featureGrid}>
-              <div className={styles.featureCard}>
+            <div className={styles.foundationGrid}>
+              <div className={styles.foundationCard}>
                 <div className={styles.featureHeader}>
                   <img src="/icon-target.svg" alt="" className={styles.featureIcon} />
-                  <h3>Google Business Profile</h3>
+                  <h3>Beautiful Website Design</h3>
                 </div>
-                <p>Setup and optimization so you show up in Google Maps and local search. The #1 way customers find service providers.</p>
+                <p>Fast, mobile-friendly websites built to convert visitors into leads. Every page is designed to showcase your work and make it easy for customers to reach you.</p>
+                <ul className={styles.benefitList}>
+                  <li>Custom design that reflects your business</li>
+                  <li>Contact forms & lead capture built-in</li>
+                  <li>Mobile-optimized for on-the-go customers</li>
+                  <li>Fast loading speeds (no clunky templates)</li>
+                </ul>
               </div>
 
-              <div className={styles.featureCard}>
-                <div className={styles.featureHeader}>
-                  <img src="/icon-seo.svg" alt="" className={styles.featureIcon} />
-                  <h3>Local SEO</h3>
-                </div>
-                <p>Rank higher for "near me" searches. When someone searches for your service + your city, you'll be there.</p>
-              </div>
-
-              <div className={styles.featureCard}>
+              <div className={styles.foundationCard}>
                 <div className={styles.featureHeader}>
                   <img src="/icon-pride.svg" alt="" className={styles.featureIcon} />
-                  <h3>Review Management</h3>
+                  <h3>Professional Branding</h3>
                 </div>
-                <p>Get more 5-star reviews and manage your online reputation. Reviews are the new word-of-mouth.</p>
+                <p>Stand out from competitors with a cohesive brand identity. We create visual elements that make your business look professional and trustworthy.</p>
+                <ul className={styles.benefitList}>
+                  <li>Logo design & brand colors</li>
+                  <li>Social media templates for posts</li>
+                  <li>Business card & marketing materials</li>
+                  <li>Consistent visual identity everywhere</li>
+                </ul>
               </div>
 
-              <div className={styles.featureCard}>
+              <div className={styles.foundationCard}>
                 <div className={styles.featureHeader}>
-                  <img src="/icon-mobile.svg" alt="" className={styles.featureIcon} />
-                  <h3>Social Media Setup</h3>
+                  <img src="/icon-seo.svg" alt="" className={styles.featureIcon} />
+                  <h3>Search Engine Optimization</h3>
                 </div>
-                <p>Professional profiles across all platforms. Look credible everywhere customers look for you.</p>
-              </div>
-
-              <div className={styles.featureCard}>
-                <div className={styles.featureHeader}>
-                  <img src="/icon-leads.svg" alt="" className={styles.featureIcon} />
-                  <h3>Email Marketing</h3>
-                </div>
-                <p>Stay top-of-mind with past customers. Automated follow-ups that bring repeat business.</p>
-              </div>
-
-              <div className={styles.featureCard}>
-                <div className={styles.featureHeader}>
-                  <img src="/icon-growth.svg" alt="" className={styles.featureIcon} />
-                  <h3>Performance Reports</h3>
-                </div>
-                <p>See exactly where your leads come from. Clear monthly reports show your ROI.</p>
+                <p>Get found by customers actively searching for your services. We optimize your website so it shows up in local search results—organically.</p>
+                <ul className={styles.benefitList}>
+                  <li>Local SEO for "near me" searches</li>
+                  <li>Google Business Profile setup</li>
+                  <li>Keyword optimization for your services</li>
+                  <li>Ongoing technical SEO improvements</li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Banner */}
-        <section className={styles.ctaBanner}>
+        {/* Did You Know Banner */}
+        <section className={styles.didYouKnowBanner}>
           <div className={styles.container}>
-            <div className={styles.ctaBannerContent}>
-              <h3>Ready to Stop Being Invisible?</h3>
-              <p>Get found by customers actively searching for your services in your area.</p>
-              <Link href="/pricing">
-                <button className={styles.ctaBannerButton}>Start Getting More Leads Today</button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* Results Section */}
-        <section className={styles.resultsSection}>
-          <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Real Results from Service Pros Like You</h2>
-            <div className={styles.resultsGrid}>
-              <div className={styles.resultCard}>
-                <div className={styles.resultMetric}>247%</div>
-                <p>Increase in website traffic in first 90 days</p>
-              </div>
-              <div className={styles.resultCard}>
-                <div className={styles.resultMetric}>3.2x</div>
-                <p>More leads per month on average</p>
-              </div>
-              <div className={styles.resultCard}>
-                <div className={styles.resultMetric}>$18k</div>
-                <p>Average revenue increase in first 6 months</p>
+            <div className={styles.bannerContent}>
+              <h2 className={styles.bannerTitle}>Did you know?</h2>
+              <div className={styles.bannerStats}>
+                <div className={styles.bannerStat}>
+                  <svg className={styles.bannerCheckmark} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12.5L10.5 15L16 9.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>68% of local searches result in a phone call or store visit</span>
+                </div>
+                <div className={styles.bannerStat}>
+                  <svg className={styles.bannerCheckmark} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12.5L10.5 15L16 9.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Most customers decide to trust you within the first 5 seconds</span>
+                </div>
+                <div className={styles.bannerStat}>
+                  <svg className={styles.bannerCheckmark} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 12.5L10.5 15L16 9.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>75% of users never scroll past the first page of search results</span>
+                </div>
               </div>
             </div>
           </div>
@@ -164,137 +119,137 @@ export default function DigitalMarketing() {
         {/* Process Section */}
         <section className={styles.processSection}>
           <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>You Focus on Jobs, We Handle Marketing</h2>
-            <p className={styles.processSubtitle}>No marketing experience needed. No confusing dashboards. Just more leads.</p>
+            <h2 className={styles.sectionTitle}>How We Build Your Foundation</h2>
+            <p className={styles.processSubtitle}>Three simple steps to building your complete online foundation</p>
             <div className={styles.processSteps}>
               <div className={styles.processStep}>
                 <div className={styles.stepNumber}>1</div>
-                <div className={styles.stepIcon}>🔍</div>
-                <h3>Marketing Audit</h3>
+                <div className={styles.stepIcon}>📝</div>
+                <h3>Subscribe & Fill Out Information</h3>
                 <ul className={styles.checkList}>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm1)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm1" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Analyze your current online presence
+                    Choose your plan and subscribe
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm2)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm2" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Identify quick wins and opportunities
+                    Complete our simple onboarding form
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm3)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm3" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Competitor research in your area
+                    Tell us about your business and goals
                   </li>
                 </ul>
               </div>
               <div className={styles.processArrow}>→</div>
               <div className={styles.processStep}>
                 <div className={styles.stepNumber}>2</div>
-                <div className={styles.stepIcon}>🚀</div>
-                <h3>Strategy & Setup</h3>
+                <div className={styles.stepIcon}>💬</div>
+                <h3>Have Onboarding Call</h3>
                 <ul className={styles.checkList}>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm4)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm4" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Optimize all your business listings
+                    Quick call to understand your vision
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm5)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm5" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Launch targeted local campaigns
+                    Clarify marketing strategy and priorities
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm6)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm6" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Set up tracking and analytics
+                    Set timeline and expectations
                   </li>
                 </ul>
               </div>
               <div className={styles.processArrow}>→</div>
               <div className={styles.processStep}>
                 <div className={styles.stepNumber}>3</div>
-                <div className={styles.stepIcon}>📞</div>
-                <h3>Leads Start Flowing</h3>
+                <div className={styles.stepIcon}>🚀</div>
+                <h3>Get Your Foundation & Collaborate</h3>
                 <ul className={styles.checkList}>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm7)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm7" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Watch your phone ring with qualified leads
+                    Receive your complete online presence
                   </li>
                   <li>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm8)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm8" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    Monthly reports showing your ROI
+                    Provide feedback and request refinements
                   </li>
                   <li className={styles.proHighlightItem}>
                     <svg className={styles.checkIcon} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M5 13l4 4L19 7" stroke="url(#gradient-dm9)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                       <defs>
                         <linearGradient id="gradient-dm9" x1="0%" y1="0%" x2="100%" y2="100%">
-                          <stop offset="0%" stopColor="#22c55e" />
-                          <stop offset="100%" stopColor="#16a34a" />
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#2563eb" />
                         </linearGradient>
                       </defs>
                     </svg>
-                    <span className={styles.proHighlight}>Pro+ members: Ongoing optimization & strategy calls</span>
+                    <span className={styles.proHighlight}>Pro+: Ongoing support & strategy sessions</span>
                   </li>
                 </ul>
               </div>
@@ -305,12 +260,12 @@ export default function DigitalMarketing() {
         {/* Social Proof */}
         <section className={styles.socialProof}>
           <div className={styles.container}>
-            <h2 className={styles.sectionTitle}>Service Pros Getting Found Online</h2>
+            <h2 className={styles.sectionTitle}>Service Pros With Solid Online Foundations</h2>
 
             <div className={styles.testimonialGrid}>
               <div className={styles.testimonialCard}>
                 <div className={styles.testimonialQuote}>
-                  "I went from begging for work to turning down jobs. My Google Business profile now shows up #1 for 'landscaping near me' in my city. Best $199/month I've ever spent."
+                  "My old website was embarrassing. Now I have a beautiful site that shows off my work, and I'm showing up on Google without paying for ads. Exactly what I needed."
                 </div>
                 <div className={styles.testimonialAuthor}>
                   <div className={styles.authorName}>Carlos M.</div>
@@ -320,7 +275,7 @@ export default function DigitalMarketing() {
 
               <div className={styles.testimonialCard}>
                 <div className={styles.testimonialQuote}>
-                  "Within 30 days, I started getting 3-5 new customer calls per week. I had to hire help to keep up with demand. This marketing stuff actually works when pros handle it."
+                  "The website + branding package transformed how customers see my business. I finally look as professional as my work quality. Lead forms work great too."
                 </div>
                 <div className={styles.testimonialAuthor}>
                   <div className={styles.authorName}>Jennifer L.</div>
@@ -330,7 +285,7 @@ export default function DigitalMarketing() {
 
               <div className={styles.testimonialCard}>
                 <div className={styles.testimonialQuote}>
-                  "I tried running my own Google Ads and Facebook ads—total disaster. These guys set it up right. Now I track every dollar spent and every lead that comes in."
+                  "I was spending $500/month on Google Ads with a terrible website. Now I have a great site with SEO that brings organic traffic. Way better ROI."
                 </div>
                 <div className={styles.testimonialAuthor}>
                   <div className={styles.authorName}>Mike R.</div>
@@ -341,16 +296,16 @@ export default function DigitalMarketing() {
 
             <div className={styles.stats}>
               <div className={styles.stat}>
-                <div className={styles.statNumber}>50k+</div>
-                <div className={styles.statLabel}>Leads Generated</div>
+                <div className={styles.statNumber}>100%</div>
+                <div className={styles.statLabel}>Custom-Designed Sites</div>
               </div>
               <div className={styles.stat}>
-                <div className={styles.statNumber}>94%</div>
-                <div className={styles.statLabel}>Client Retention Rate</div>
+                <div className={styles.statNumber}>3-Part</div>
+                <div className={styles.statLabel}>Foundation Included</div>
               </div>
               <div className={styles.stat}>
-                <div className={styles.statNumber}>$2.4M+</div>
-                <div className={styles.statLabel}>Revenue Generated for Clients</div>
+                <div className={styles.statNumber}>No</div>
+                <div className={styles.statLabel}>Ad Spend Required</div>
               </div>
             </div>
           </div>
@@ -359,14 +314,14 @@ export default function DigitalMarketing() {
         {/* CTA Section */}
         <section className={styles.cta}>
           <div className={styles.container}>
-            <h2 className={styles.ctaTitle}>Ready to Get More Leads?</h2>
+            <h2 className={styles.ctaTitle}>Ready to Build Your Foundation?</h2>
             <p className={styles.ctaSubtitle}>
-              Start showing up in local search and getting found by ready-to-buy customers.
+              Get the complete online marketing foundation: Website + Branding + SEO. No ad campaigns. No dashboards. Just a professional online presence that converts.
             </p>
             <Link href="/pricing">
-              <button className={styles.primaryButton}>Start Getting Leads</button>
+              <button className={styles.primaryButton}>See Plans & Pricing</button>
             </Link>
-            <p className={styles.guarantee}>✓ Results in 30 Days  ✓ Cancel Anytime</p>
+            <p className={styles.guarantee}>✓ Custom Design  ✓ Full Branding Package  ✓ SEO Included</p>
           </div>
         </section>
       </main>

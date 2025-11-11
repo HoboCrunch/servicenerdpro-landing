@@ -35,9 +35,9 @@ export default function HomeClient() {
                   <span className={styles.pricePeriod}>/month</span>
                 </div>
                 <div className={styles.priceDetails}>
-                  <div className={styles.priceFeature}>✓ Website Design & Hosting</div>
-                  <div className={styles.priceFeature}>✓ Professional Branding</div>
-                  <div className={styles.priceFeature}>✓ Google Business Setup</div>
+                  <div className={styles.priceFeature}>✓ Web design, hosting, & SEO</div>
+                  <div className={styles.priceFeature}>✓ Professional Branding Kit</div>
+                  <div className={styles.priceFeature}>✓ Online Marketing Foundation</div>
                 </div>
               </div>
               <div className={styles.ctaButtons}>
@@ -90,8 +90,8 @@ export default function HomeClient() {
                   </defs>
                 </svg>
                 <div className={styles.trustTextContent}>
-                  <div className={styles.trustTitle}>Money Back Guarantee</div>
-                  <div className={styles.trustSubtitle}>Cancel in first month, get refunded</div>
+                  <div className={styles.trustTitle}>30-Day Money-Back Guarantee</div>
+                  <div className={styles.trustSubtitle}>Full refund if you cancel within 30 days</div>
                 </div>
               </div>
               <div className={styles.trustItem}>
@@ -168,7 +168,7 @@ export default function HomeClient() {
               <div className={styles.featuredReviewContent}>
                 <div className={styles.featuredReviewLeft}>
                   <img
-                    src="/review-jarred.webp"
+                    src="https://szkuwwapzjnwhiiglzim.supabase.co/storage/v1/object/public/images/review-jarred.webp"
                     alt="Jarred Campeau"
                     className={styles.featuredReviewAvatar}
                   />
@@ -246,7 +246,7 @@ export default function HomeClient() {
               </h2>
 
               <p className={styles.ctaSubtitle}>
-                Join 500+ service businesses that chose professional growth over DIY struggles
+                Join 100+ service businesses that chose professional growth over DIY struggles
               </p>
 
               <div className={styles.ctaCard}>
@@ -340,7 +340,7 @@ export default function HomeClient() {
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="#f97316"/>
                     </svg>
-                    <span>500+ businesses trust ServiceNerd Pro • 4.9/5 rating</span>
+                    <span>100+ businesses trust <span style={{ whiteSpace: 'nowrap' }}>Service Pro</span> • 4.9/5 rating</span>
                   </div>
                 </div>
               </div>
@@ -368,7 +368,7 @@ export default function HomeClient() {
               <div className={styles.faqItem}>
                 <h3 className={styles.faqQuestion}>Can I cancel anytime?</h3>
                 <p className={styles.faqAnswer}>
-                  Yes. Cancel anytime with 30 days notice. No long-term contracts, no cancellation fees. You're in control.
+                  Yes. Cancel anytime—cancellations take effect at the end of your current billing cycle. No long-term contracts, no cancellation fees. You're in control.
                 </p>
               </div>
               <div className={styles.faqItem}>
@@ -392,13 +392,6 @@ export default function HomeClient() {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <footer className={styles.footer}>
-          <div className={styles.container}>
-            <p>&copy; 2025 ServiceNerd Pro. All rights reserved.</p>
-          </div>
-        </footer>
       </main>
     </>
   )

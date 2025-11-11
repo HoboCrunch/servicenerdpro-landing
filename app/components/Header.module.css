@@ -195,6 +195,228 @@
   box-shadow: 0 4px 8px rgba(249, 115, 22, 0.2);
 }
 
+/* Mobile Hamburger Button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  min-width: 48px;
+  min-height: 48px;
+  z-index: 1002;
+  position: relative;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+.hamburgerLine {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile Menu Overlay */
+.mobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile Menu */
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 80%;
+  max-width: 320px;
+  background: var(--primary-blue-dark);
+  z-index: 1001;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.mobileMenuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mobileMenuTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+}
+
+.mobileCloseButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.mobileCloseButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.mobileCloseButton svg {
+  display: block;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.mobileNavLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.mobileNavLink:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-yellow);
+}
+
+.mobileDropdown {
+  /* Container for Services dropdown */
+}
+
+.mobileDropdown .mobileNavLink {
+  /* Ensure Services button matches other links exactly */
+  font-size: 1.125rem;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+}
+
+.mobileDropdownArrow {
+  transition: transform 0.3s ease;
+}
+
+.mobileDropdownArrowOpen {
+  transform: rotate(180deg);
+}
+
+.mobileDropdownMenu {
+  background: rgba(0, 0, 0, 0.2);
+  animation: expandDown 0.3s ease;
+}
+
+@keyframes expandDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.mobileDropdownItem {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.5rem 1rem 2.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background 0.2s ease;
+}
+
+.mobileDropdownItem:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.mobileDropdownItemTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-yellow);
+  margin-bottom: 0.25rem;
+}
+
+.mobileDropdownItemDesc {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mobileCtaButton {
+  margin: 1.5rem 1.5rem 0 1.5rem;
+  background: var(--accent-orange);
+  color: white;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: calc(100% - 3rem);
+}
+
+.mobileCtaButton:hover {
+  background: var(--accent-warm);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .container {
@@ -214,28 +436,11 @@
   }
 
   .nav {
-    gap: 1rem;
-  }
-
-  .dropdown {
     display: none;
   }
 
-  .navLink {
-    display: none;
-  }
-
-  .dropdownMenu {
-    left: auto;
-    right: 0;
-    transform: none;
-    min-width: 240px;
-  }
-
-  .dropdownMenu::before {
-    left: auto;
-    right: 20px;
-    transform: none;
+  .hamburger {
+    display: flex;
   }
 }
 

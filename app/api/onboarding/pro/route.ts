@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
+import { supabaseAdmin } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
@@ -79,7 +80,7 @@ export async function POST(request: NextRequest) {
         const session = await stripe.checkout.sessions.retrieve(sessionId)
         customerId = session.customer as string
       } catch (error) {
-        console.error('Error retrieving session:', error)
+        // Error retrieving session
       }
     }
 
@@ -104,75 +105,116 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Here you would typically:
-    // 1. Store this data in your database
-    // 2. Send notification emails to your team
-    // 3. Create a project in your project management system
-    // 4. Schedule the first strategy session
-    // 5. Create business card order
-    // 6. Send a welcome email to the customer with dashboard access
+    // Store data in Supabase
+    try {
+      // Find or create user
+      let userId: string | null = null
 
-    // For now, we'll log it and send a success response
-    console.log('Pro+ Onboarding Submission:', {
-      sessionId,
-      customerId,
-      businessInfo: {
-        businessName,
-        ownerName,
-        email,
-        phone,
-        businessType,
-        businessAddress,
-        serviceArea,
-        yearsInBusiness,
-      },
-      websiteContent: {
-        businessDescription,
-        servicesOffered,
-        targetAudience,
-        websiteGoals,
-        keyDifferentiators,
-        pageRequirements,
-      },
-      seo: {
-        primaryKeywords,
-        competitorNames,
-        googleBusinessExists,
-        googleBusinessEmail,
-      },
-      branding: {
-        brandColors,
-        logoStyle,
-        brandPersonality,
-        competitorWebsites,
-      },
-      reviewManagement: {
-        reviewPlatforms,
-        currentReviewStrategy,
-      },
-      marketing: {
-        socialMediaAccounts,
-        marketingGoals,
-        adBudget,
-      },
-      businessCards: {
-        cardName,
-        cardTitle,
-        cardEmail,
-        cardPhone,
-        mailingAddress,
-      },
-      strategySession: {
-        strategySessionTopics,
-        businessChallenges,
-      },
-      domain: {
-        domainPreference,
-        hasDomain,
-        existingDomain,
-      },
-      additionalNotes,
-    })
+      // Try to find existing user by email
+      const { data: existingUser } = await supabaseAdmin
+        .from('users')
+        .select('id')
+        .eq('email', email)
+        .single()
+
+      if (existingUser) {
+        userId = existingUser.id
+        // Update user with latest info
+        await supabaseAdmin
+          .from('users')
+          .update({
+            stripe_customer_id: customerId,
+            plan: plan,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', userId)
+      } else {
+        // Create new user
+        const { data: newUser, error: userError } = await supabaseAdmin
+          .from('users')
+          .insert({
+            email: email,
+            stripe_customer_id: customerId,
+            plan: plan,
+          })
+          .select('id')
+          .single()
+
+        if (userError) throw userError
+        userId = newUser.id
+      }
+
+      // Store complete onboarding response
+      const { error: onboardingError } = await supabaseAdmin
+        .from('onboarding_responses')
+        .insert({
+          user_id: userId,
+          stripe_session_id: sessionId,
+          plan: plan,
+          form_data: {
+            businessInfo: {
+              businessName,
+              ownerName,
+              email,
+              phone,
+              businessType,
+              businessAddress,
+              serviceArea,
+              yearsInBusiness,
+            },
+            websiteContent: {
+              businessDescription,
+              servicesOffered,
+              targetAudience,
+              websiteGoals,
+              keyDifferentiators,
+              pageRequirements,
+            },
+            seo: {
+              primaryKeywords,
+              competitorNames,
+              googleBusinessExists,
+              googleBusinessEmail,
+            },
+            branding: {
+              brandColors,
+              logoStyle,
+              brandPersonality,
+              competitorWebsites,
+            },
+            reviewManagement: {
+              reviewPlatforms,
+              currentReviewStrategy,
+            },
+            marketing: {
+              socialMediaAccounts,
+              marketingGoals,
+              adBudget,
+            },
+            businessCards: {
+              cardName,
+              cardTitle,
+              cardEmail,
+              cardPhone,
+              mailingAddress,
+            },
+            strategySession: {
+              strategySessionTopics,
+              businessChallenges,
+            },
+            domain: {
+              domainPreference,
+              hasDomain,
+              existingDomain,
+            },
+            additionalNotes,
+          },
+        })
+
+      if (onboardingError) throw onboardingError
+    } catch (dbError) {
+      // Don't fail the request if DB save fails - we still have it in Stripe
+    }
 
     // TODO: Implement the following:
     // - Send email to customer with welcome package
@@ -188,7 +230,6 @@ export async function POST(request: NextRequest) {
       message: 'Pro+ onboarding form submitted successfully',
     })
   } catch (error: any) {
-    console.error('Pro+ onboarding error:', error)
     return NextResponse.json(
       { error: error.message || 'Failed to submit onboarding form' },
       { status: 500 }
