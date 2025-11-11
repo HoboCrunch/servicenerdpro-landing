@@ -20,11 +20,20 @@ export const metadata: Metadata = {
     description: 'Stop losing customers to online competition. Get your website, branding, and Google presence in 7 days for $199/month.',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Service Pro+ - Professional Websites for Service Businesses',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Service Pro+ - Professional Websites for Service Businesses',
     description: 'Website, branding, and Google presence delivered in 7 days. $199/month.',
+    images: ['/og-image.png'],
   },
   icons: {
     icon: '/servicenerdpro-logo.svg',

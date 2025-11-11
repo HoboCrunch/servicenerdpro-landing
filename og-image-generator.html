@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <title>ServiceNerdPro OG Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .og-container {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background decoration */
+        .og-container::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+        }
+
+        .og-container::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(251, 146, 60, 0.1) 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            border-radius: 50%;
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+
+        .logo-container img {
+            width: 120px;
+            height: auto;
+            filter: drop-shadow(0 4px 12px rgba(249, 115, 22, 0.3));
+        }
+
+        .brand-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 40px;
+            z-index: 2;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name .pro {
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .brand-name .plus {
+            font-size: 24px;
+            vertical-align: super;
+        }
+
+        .headline {
+            font-size: 62px;
+            font-weight: 800;
+            color: #ffffff;
+            text-align: center;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            max-width: 900px;
+            z-index: 2;
+            letter-spacing: -1.5px;
+        }
+
+        .value-props {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            z-index: 2;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .value-prop {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #e5e5e5;
+        }
+
+        .value-prop .check {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .cta {
+            margin-top: 35px;
+            z-index: 2;
+        }
+
+        .cta-text {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtext {
+            font-size: 20px;
+            color: #a3a3a3;
+            margin-top: 10px;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="og-container">
+        <div class="logo-container">
+            <img src="/servicenerdpro-logo.svg" alt="Service Nerd Pro Logo">
+        </div>
+
+        <div class="brand-name">
+            Service Nerd <span class="pro">Pro<sup class="plus">+</sup></span>
+        </div>
+
+        <h1 class="headline">
+            Launch Your Online Presence,<br>Land Premium Jobs
+        </h1>
+
+        <div class="value-props">
+            <div class="value-prop">
+                <span class="check">✓</span>
+                <span>7-Day Delivery</span>
+            </div>
+            <div class="value-prop">
+                <span class="check">✓</span>
+                <span>$199/month</span>
+            </div>
+            <div class="value-prop">
+                <span class="check">✓</span>
+                <span>30-Day Money-Back</span>
+            </div>
+        </div>
+
+        <div class="cta">
+            <div class="cta-text">Professional Website + Branding + SEO</div>
+            <div class="subtext">Built for Service Business Owners</div>
+        </div>
+    </div>
+
+    <script>
+        // Instructions will be shown in console
+        console.log(`
+🎨 OG IMAGE GENERATOR - INSTRUCTIONS
+====================================
+
+This page is sized exactly 1200x630px for social media.
+
+TO CREATE YOUR OG IMAGE:
+
+Option 1 - Screenshot (Mac):
+1. Press Cmd + Shift + 4
+2. Press Spacebar (cursor becomes camera)
+3. Click this browser window
+4. Save as 'og-image.png'
+5. Move to /public/ folder
+
+Option 2 - Screenshot (Windows):
+1. Press Windows + Shift + S
+2. Select the entire browser window
+3. Save as 'og-image.png'
+4. Move to /public/ folder
+
+Option 3 - Browser DevTools:
+1. Right-click → Inspect
+2. Toggle device toolbar (Cmd+Shift+M / Ctrl+Shift+M)
+3. Set dimensions to 1200 x 630
+4. Take screenshot
+
+Once saved, your link previews will show this image!
+        `);
+    </script>
+</body>
+</html>
