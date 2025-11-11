@@ -5,7 +5,6 @@ import styles from '../page.module.css'
 import Header from './Header'
 import BentoGrid from './BentoGrid'
 import StickyMobileCTA from './StickyMobileCTA'
-import ExitIntentPopup from './ExitIntentPopup'
 import { trackCTAClick } from '../utils/analytics'
 import { usePageTracking } from '../hooks/usePageTracking'
 
@@ -17,14 +16,13 @@ export default function HomeClient() {
     <>
       <Header />
       <StickyMobileCTA />
-      <ExitIntentPopup />
       <main className={styles.main}>
         {/* Hero Section */}
         <section className={styles.hero}>
           <div className={styles.container}>
             <div className={styles.heroContent}>
               <h1 className={styles.heroTitle}>
-                Look Premium Online, Book Premium Jobs
+                Launch Your Online Presence, Land Premium Jobs
               </h1>
               <p className={styles.heroSubtitle}>
                 Professional website, branding, and Google presence—delivered in 7 days. Stop losing customers to competitors with better online presence.

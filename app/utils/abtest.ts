@@ -14,7 +14,7 @@ export interface HeroHeadlineTest {
 export const HERO_HEADLINES: Record<HeroHeadlineVariant, HeroHeadlineTest> = {
   control: {
     variant: 'control',
-    headline: 'Look Premium Online, Book Premium Jobs',
+    headline: 'Launch Your Online Presence, Land Premium Jobs',
     subheadline: 'Professional website, branding, and Google presence—delivered in 7 days. Stop losing customers to competitors with better online presence.',
   },
   variant_a: {

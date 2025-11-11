@@ -7,7 +7,7 @@ export default function BentoGrid() {
     <div className={styles.transformationShowcase}>
       {/* Problem Statement */}
       <div className={styles.problemStatement}>
-        <h2 className={styles.problemHeading}>Still Losing Customers to Your Website?</h2>
+        <h2 className={styles.problemHeading}>Customers Still Can't Find You?</h2>
         <p className={styles.problemSubheading}>
           Every day without a professional online presence costs you jobs, credibility, and money
         </p>
